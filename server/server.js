@@ -20,8 +20,8 @@ mongoose.connect(DB, { useNewUrlParser: true})
 .catch((err)=>console.log (err));
 
 App.use("/api/user", user);
-App.use("./api/patient", patient);
-App.use("./api/doctor", doctor);
+App.use("/api/patient", patient);
+App.use("/api/doctor", doctor);
 
 App.get('/',(req,res)=>res.send('Nespital activated'));
 //port
