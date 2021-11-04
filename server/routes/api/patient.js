@@ -6,8 +6,9 @@ const router=express.Router();
 //@access public
 router.get("/test", (req, res) => res.json({ msg: "patient works" }));
 
-//@ route get api/user/test
+//@ route get api/user/register
 //@desc test user route
 //@access public
+
 
 module.exports=router
