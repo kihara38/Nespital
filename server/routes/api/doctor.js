@@ -38,7 +38,10 @@ router.post("/", async (req, res) => {
       },
     });
 
-    return res.status(200).json({ success: true, data: newDoctor });
+    return res.status(200).json({
+      success: true,
+      data: newDoctor,
+    });
   } catch (error) {
     return res.status(400).json({
       success: false,
