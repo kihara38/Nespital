@@ -9,7 +9,8 @@ const User= new Schema({
     avatar:{type:String},
     role:{
         type: String,
-        enum:['admin', 'doctor', 'patient']
+        enum:['admin', 'doctor', 'patient'],
+        required: true
     }
 },
 
