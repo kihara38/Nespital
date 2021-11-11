@@ -1,66 +1,40 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Nav,H1,Ul,Li,MobileNavContainer, MenuIcon,Alink} from "./element";
+import {
+  Nav,
+  Logo,
+  Ul,
+  //MobileNavContainer,
+  MenuIcon,
+  Alink,
+  //Blink,
+} from "./element";
 const NavBar = () => {
-const [open,setopen] =useState(true)
+  const [open, setopen] = useState(true);
 
-const HandleMenuOpen=()=>{
-  setopen(!open)
-}
-    return (  
-        <Nav>
-          <div style={{
-            display: 'flex',
-            justifyContent:'space-between'
-          }}>
-          <Link to="/"><H1>NESPITAL</H1></Link>
-           <MenuIcon onClick={HandleMenuOpen}/>
-          </div>
-        <Ul>
-          <Li>
-            <Alink to="/">home</Alink>
-          </Li>
-          <Li>
-            <Alink to="/about">about</Alink>
-          </Li>
-          <Li>
-            <Alink to="/appointment">appointment</Alink>
-          </Li>
-          <Li>
-            <Alink to="/patient">patient</Alink>
-          </Li>
-          <Li>
-            <Alink to="/doctor">doctor</Alink>
-          </Li>
-        </Ul>
-        <MobileNav open={open}/>
-      </Nav>
-     );
-}
- 
-export default NavBar;
-
-
-const MobileNav = ({open})=>{
-
+  const HandleMenuOpen = () => {
+    setopen(!open);
+  };
   return (
-    <MobileNavContainer open={open}>
-          <Li>
-            <Link to="/">home</Link>
-          </Li>
-          <Li>
-            <Link to="/about">about</Link>
-          </Li>
-          <Li>
-            <Link to="/appointment">appointment</Link>
-          </Li>
-          <Li>
-            <Link to="/patient">patient</Link>
-          </Li>
-          <Li>
-            <Link to="/doctor">doctor</Link>
-          </Li>
+    <Nav>
+      <div>
+        <Logo to="/">
+          <h1>NESPITAL</h1>
+        </Logo>
+        <MenuIcon onClick={HandleMenuOpen} />
+      </div>
+      <Ul>
+        <Alink to="/">Home</Alink>
 
-    </MobileNavContainer>
-  )
-}
+        <Alink to="/about">About</Alink>
+
+        <Alink to="/appointment">Appointment</Alink>
+
+        <Alink to="/patient">Patient</Alink>
+
+        <Alink to="/doctor">Doctor</Alink>
+      </Ul>
+    </Nav>
+  );
+};
+
+export default NavBar;

@@ -11,7 +11,14 @@ router.get("/test", (req, res) => res.json({ msg: "patient works" }));
 //@desc post patient route
 //@access public
 router.post("/", async (req, res) => {
-  const { userId: user, HPN, BIO, personaladdress, emergencyperson } = req.body;
+  const {
+    userId: user,
+    HPN,
+    BIO,
+    personaladdress,
+    emergencyperson,
+    account_status,
+  } = req.body;
   try {
     const newPatient = await patient.create({
       user,
@@ -19,6 +26,7 @@ router.post("/", async (req, res) => {
       BIO,
       personaladdress,
       emergencyperson,
+      account_status,
     });
     return res.status(200).json({
       success: true,

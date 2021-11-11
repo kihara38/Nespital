@@ -43,6 +43,7 @@ const Doctor = new Schema({
       type: String,
     },
   },
+
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",

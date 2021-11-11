@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
     twitter,
     linkedin,
     instagram,
+    approval_status,
   } = req.body;
 
   try {
@@ -36,6 +37,7 @@ router.post("/", async (req, res) => {
         linkedin,
         instagram,
       },
+      approval_status,
     });
 
     return res.status(200).json({

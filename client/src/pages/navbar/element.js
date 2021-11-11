@@ -1,84 +1,75 @@
 import styled from "styled-components";
-
-import {FaBars} from 'react-icons/fa'
+import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+export const Nav = styled.div`
+  background-color: rgba(138, 43, 226, 0.3);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0.2rem;
+  position: fixed;
+  height: 5rem;
 
-export  const Nav=styled.nav`
-    background:  rgb(25, 25, 252,0.2);
-    height: 15%;
-    width: 100%;
-    position: fixed;
-    display:flex;
-    margin-top:-1rem;
-    
-`
-export const H1=styled.h1`
-    color:white;
-    font-size: 35px;
-    line-height: 40px;
-    margin-left:1.5rem;
-`
-export const Ul=styled.ul`
-    display:none;
+  div {
+    display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
-    margin:0px 10px 0px 80px;
-    text-align:center;
-    list-style:none;
-    
-    @media (min-width: 600px){
-        display: flex;
-    }
-`
-export const Alink=styled(Link)`
-text-decoration:none;
-`
-export const Li=styled.li`
-    /* background:rgba(22, 221, 4, 0.5); */
-    border-radius: 50px;
-    border: 1px;
-    width: 140px;
-    height: 50px;
-    font-size: 20px;
-    font-weight:10px;
-    &:hover{background: rgb(182, 230, 10); }
-`
-export const MobileNavContainer=styled.ul`
-    background:  #9e9595;
-    text-decoration:none;
-    list-style:none;
-    text-align:center;
-    margin-top:1.7rem;
-    height:18rem;
-    width:12rem;
-    position: absolute;
-    display: ${({open}) => open? "flex" : "none"};
+  }
+`;
+export const Logo = styled(Link)`
+  padding: 1rem 0;
+  color: white;
+  text-decoration: none;
+  h1 {
+    font-family: "Philosopher", sans-serif;
+    font-weight: 800;
+  }
+`;
+export const Ul = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  @media (max-width: 790px) {
+    overflow: hidden;
     flex-direction: column;
-    top: 70px;
-    left: 0;
-    z-index: 3000;
-    transition:ease-in 10s;
+    width: 30%;
+    margin-top: 1.2rem;
+    background-color: rgba(91, 3, 192, 0.3);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+`;
+export const link = styled(Link)`
+  text-decoration: none;
+`;
+export const Alink = styled(Link)`
+  padding: 1rem 2rem;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  font-weight: 700;
 
-
-    @media (min-width: 600px){
-        display: none;
-    }
-    
-`
+  &:hover {
+    background-color: purple;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    transition: ease-in-out 0.5s;
+  }
+`;
 export const MenuIcon = styled(FaBars)`
-color: black;
-font-size: 40px;
-margin:2rem;
-margin-left:8rem;
+  display: none;
+  cursor: pointer;
+  height: 4rem;
+  width: 25px;
+  margin-left: 23rem;
 
-
-@media (min-width: 600px){
-        display: none;
-    }
-
-
-
-
-`
+  @media (max-width: 790px) {
+    display: flex;
+  }
+`;

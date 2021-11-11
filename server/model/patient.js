@@ -29,6 +29,11 @@ const Patient = new Schema(
         contact: { type: Number },
       },
     ],
+    account_status: {
+      type: String,
+      enum: ["BOOKED", "CANCELLED"],
+      default: "BOOKED",
+    },
 
     user: {
       type: mongoose.Schema.Types.ObjectId,

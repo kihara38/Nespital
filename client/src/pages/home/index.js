@@ -1,39 +1,57 @@
 import { Link } from "react-router-dom";
-import {Bun1,Bun2,Intro1,Intro2, Mainsection, Section,H1,P,Div } from "./element";
+import { Bun1, Intro1, Mainsection, Section, P, Div, Div1 } from "./element";
 
 const Home = () => {
-  return ( 
-      <Div>
-          
-          <Bun1 >
-              <Link to="/login">
-              signup
-              </Link>
-          </Bun1>
-          <Bun2>
-              <Link to='/register'>
-              sign in
-              </Link>
-              </Bun2>
-          
-          <Intro1 >onclick</Intro1>
-          <Intro2 >HOSPITAL</Intro2>
-          <Mainsection>
+  return (
+    <Div>
+      <Div1>
+        <Bun1>
+          <button>
+            <Link to="/login">
+              <p>signup</p>{" "}
+            </Link>
+          </button>
+          <button>
+            <Link to="/register">
+              <p>sign in</p>
+            </Link>
+          </button>
+        </Bun1>
+
+        <Intro1>
+          <h2>onclick</h2>
+          <h1>HOSPITAL</h1>
+        </Intro1>
+
+        <Mainsection>
           <Section>
-              <H1>Doctor</H1>
-              <P>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</P>
+            <h1>Doctor</h1>
+            <P>
+              In publishing and graphic design, Lorem ipsum is a placeholder
+              text commonly used to demonstrate the visual form of a document or
+              a typeface without relying on meaningful content.
+            </P>
           </Section>
           <Section>
-              <H1>Patient</H1>
-              <P>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</P>
+            <h1>Patient</h1>
+            <P>
+              In publishing and graphic design, Lorem ipsum is a placeholder
+              text commonly used to demonstrate the visual form of a document or
+              a typeface without relying on meaningful content.
+            </P>
           </Section>
           <Section>
-              <H1>Appointment</H1>
-              <P>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</P>
+            <h2>Appointment</h2>
+            <P>
+              In publishing and graphic design, Lorem ipsum is a placeholder
+              text commonly used to demonstrate the visual form of a document or
+              a typeface without relying on meaningful content.
+            </P>
           </Section>
-          </Mainsection>
-      </Div>
-   );
-}
+        </Mainsection>
+      </Div1>
+    </Div>
+  );
+};
 
 export default Home;
