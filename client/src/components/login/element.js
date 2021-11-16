@@ -1,21 +1,39 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import login from "../../resourses/login.svg";
+
 export const Div = styled.div`
-  background-image: url(${login});
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 94, 0.521);
+  position: relative;
+`;
+
+export const Left = styled.div`
+  width: 50%;
+`;
+export const Right = styled.div`
+  width: 50%;
+`;
+export const LoginImage = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 export const SignupForm = styled.form`
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
+  height: 100%;
 `;
 
 export const Title = styled.h2`
   font-size: 2.2rem;
-  color: #444;
+  color: #ddd;
   margin-bottom: 10px;
+  text-transform: capitalize;
 `;
 export const InputField = styled.div`
   max-width: 380px;
@@ -54,12 +72,28 @@ export const Bunt = styled(Link)`
   outline: none;
   border-radius: 49px;
   cursor: pointer;
-  background-color: rgb(13, 115, 218);
+  background-color: rgb(70, 67, 241);
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+
   &:hover {
     background-color: cornflowerblue;
   }
   text-align: center;
+`;
+
+export const Clip = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: purple;
+  clip-path: circle(47.1% at 29% 4%);
 `;

@@ -18,6 +18,7 @@ const P_Form = () => {
   return (
     <Div>
       <Form>
+        <img src="" alt="" />
         <Div1>
           {"DOB"}
           <Input type="date" name="Date of birth" />

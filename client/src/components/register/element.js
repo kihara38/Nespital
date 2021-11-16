@@ -1,6 +1,24 @@
 import styled from "styled-components";
-
-export const Div = styled.div``;
+export const Clip = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background-color: purple;
+  clip-path: circle(47.1% at 29% 4%);
+`;
+export const Div1 = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: rgba(0, 0, 94, 0.521);
+`;
+export const Left = styled.div`
+  width: 50%;
+`;
 export const SigninForm = styled.form`
   display: flex;
   justify-content: center;
@@ -70,5 +88,14 @@ export const Bunt = styled.input`
   font-weight: 600;
   &:hover {
     background-color: cornflowerblue;
+  }
+`;
+
+export const Right = styled.div`
+  width: 50%;
+
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;

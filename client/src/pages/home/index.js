@@ -1,22 +1,23 @@
-import { Link } from "react-router-dom";
-import { Bun1, Intro1, Mainsection, Section, P, Div, Div1 } from "./element";
+import Footer from "../footer";
+import {
+  Intro1,
+  Mainsection,
+  Section,
+  P,
+  Div,
+  Div1,
+  ButtonWrapper,
+  LinkButton,
+} from "./element";
 
 const Home = () => {
   return (
     <Div>
       <Div1>
-        <Bun1>
-          <button>
-            <Link to="/login">
-              <p>signup</p>{" "}
-            </Link>
-          </button>
-          <button>
-            <Link to="/register">
-              <p>sign in</p>
-            </Link>
-          </button>
-        </Bun1>
+        <ButtonWrapper>
+          <LinkButton to="/login">log in</LinkButton>
+          <LinkButton to="/register">sign in</LinkButton>
+        </ButtonWrapper>
 
         <Intro1>
           <h2>onclick</h2>
@@ -49,6 +50,7 @@ const Home = () => {
             </P>
           </Section>
         </Mainsection>
+        <Footer />
       </Div1>
     </Div>
   );

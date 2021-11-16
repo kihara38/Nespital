@@ -1,22 +1,27 @@
 import styled from "styled-components";
 import detail from "../../resourses/detail.svg";
 export const Div = styled.div`
-  margin: 0;
-  padding: 0;
   justify-content: space-between;
   background-image: url(${detail});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100%;
   background-color: blue;
+  min-height: 100vh;
 `;
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
+  img {
+    background-color: black;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: none;
+    margin: 2rem 0 1rem 0;
+  }
 `;
 export const Div1 = styled.div`
   justify-content: space-between;

@@ -7,6 +7,9 @@ import Register from "./components/register";
 import Login from "./components/login";
 import PatientProfile from "./components/patientprofile";
 import P_form from "./components/patientform";
+import DoctorProfile from "./components/doctorsprofile";
+import Consultation from "./components/consultation";
+import Booking from "./components/appointment";
 
 function App() {
   return (
@@ -15,7 +18,6 @@ function App() {
         <Route path="/" exact>
           <NavBar />
           <Home />
-          <Footer />
         </Route>
         <Route path="/About" exact>
           <NavBar />
@@ -48,6 +50,15 @@ function App() {
         </Route>
         <Route path="/P_form" exact>
           <P_form />
+        </Route>
+        <Route path="/DoctorProfile" exact>
+          <DoctorProfile />
+        </Route>
+        <Route path="/Booking" exact>
+          <Booking />
+        </Route>
+        <Route path="/Consultation" exact>
+          <Consultation />
         </Route>
       </Switch>
     </Router>

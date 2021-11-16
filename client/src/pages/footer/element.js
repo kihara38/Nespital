@@ -37,6 +37,7 @@ export const SocialIcon = styled.a`
   &:hover {
     color: #0082e6;
     border-color: #0082e6;
+    transition: 1s;
   }
 `;
 export const Foot = styled.footer`
