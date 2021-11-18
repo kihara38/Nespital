@@ -12,6 +12,7 @@ router.post("/", async (req, res) => {
   const {
     userId: user,
     doctorsId,
+    imageUrl,
     specialization,
     experience,
     education,
@@ -27,6 +28,7 @@ router.post("/", async (req, res) => {
     const newDoctor = await doctor.create({
       user,
       doctorsId,
+      imageUrl,
       specialization,
       experience,
       education,

@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const Appointment = new Schema(
   {
     disease: { type: String },
-    consotation: { type: String },
+    consultation: { type: String },
+    imageUrl: { type: String, unique: true },
     approval_status: {
       type: String,
       enum: ["Pending", "Declined", "Approved"],
@@ -15,3 +16,4 @@ const Appointment = new Schema(
   },
   { timestamps: true }
 );
+module.exports = mongoose.model("Appointment", Appointment);

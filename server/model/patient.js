@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const Patient = new Schema(
   {
     HPN: { type: String },
+    imageUrl: { type: String, unique: true },
     BIO: [
       {
         Sex: { type: String },
