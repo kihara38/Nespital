@@ -20,7 +20,7 @@ router.get(
     try {
       let patients = await patient
         .findOne({ userId: user })
-        .populate("user")
+        .populate("user", ["name", "role"])
         .exec();
       return res.status(200).json({
         success: true,
@@ -29,7 +29,7 @@ router.get(
     } catch (error) {
       return res.status(400).json({
         success: false,
-        message: error,
+        message: errors,
       });
     }
   }
