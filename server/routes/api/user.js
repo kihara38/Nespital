@@ -52,15 +52,16 @@ router.post("/", (req, res) => {
     bcrypt.hash(newUser.password, salt, (err, hash) => {
       if (err) throw err;
       newUser.password = hash;
-      newUser
-        .save()
-        .then(() =>
-          res.json({
-            success: true,
-            data: newUser,
-          })
-        )
-        .catch((err) => res.status(400).json(err));
+      newUser.save((err) => {
+        if (err) console.log(err);
+      });
+      // .then((user) =>
+      //   res.json({
+      //     success: true,
+      //     data: user,
+      //   })
+      // )
+      //.catch((err) => res.status(400).json(err));
     });
   });
 });
@@ -78,6 +79,7 @@ router.post("/login", (req, res) => {
 
   //find user by email
   User.findOne({ email }).then((user) => {
+    console.log(email);
     //check for user
     if (!user) {
       return res.status(404).json({

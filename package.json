@@ -1,0 +1,21 @@
+{
+  "name": "hospitali",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "npm start --prefix server",
+    "client": "npm start  --prefix client",
+    "dev": "concurrently \"yarn server\" \"yarn client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kihara38/Nespital.git"
+  },
+  "author": "kihara nelson mburu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kihara38/Nespital/issues"
+  },
+  "homepage": "https://github.com/kihara38/Nespital#readme"
+}

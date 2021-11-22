@@ -1,3 +1,7 @@
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+
 import {
   Form,
   Div,
@@ -14,18 +18,86 @@ import {
   Legend,
   Select,
 } from "./element";
-const P_Form = () => {
+const PatientForm = () => {
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateOBjectURl] = useState(null);
+  const [DoB, setDOB] = useState("");
+  const [gender, setGender] = useState("");
+  const [Phone_number1, setPhone_number1] = useState("");
+  const [county, setCounty] = useState("");
+  const [District, setDistrict] = useState("");
+  const [Location, setLocation] = useState("");
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [name, setname] = useState("");
+  const [relationship, setrelationship] = useState("");
+  const [Phone_number, setPhone_number] = useState("");
+  const [county2, setcounty2] = useState("");
+  const [Location2, setLocation2] = useState("");
+
+  const uploadToClient = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      const i = e.target.files[0];
+      setImage(i);
+      setCreateOBjectURl(URL.createObjectURL(i));
+    }
+  };
+  const history = useHistory();
+
+  const uploadToServer = async (e) => {
+    e.preventDefault();
+    const body = new FormData();
+    body.append("doctor-image", image);
+    body.append("DoB", DoB);
+    body.append("gender", gender);
+    body.append("Phone_number", Phone_number);
+    body.append("county", county);
+    body.append("District", District);
+    body.append("Location", Location);
+    body.append("height", height);
+    body.append("weight", weight);
+    body.append("name", name);
+    body.append("relationship", relationship);
+    body.append("Phone_number1", Phone_number1);
+    body.append("county2", county2);
+    body.append("Location2", Location2);
+
+    try {
+      await axios.post("http://localhost:5002/api/patient/", body);
+      history.push("/patientprofile");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Div>
-      <Form>
-        <img src="" alt="" />
+      <Form onSubmit={uploadToServer}>
+        <img src={createObjectURL} alt="" />
+        <input type="file" name="patient/img" onChange={uploadToClient} />
         <Div1>
           {"DOB"}
-          <Input type="date" name="Date of birth" />
+          <Input
+            type="date"
+            name="Date of birth"
+            value={DoB}
+            onChange={(e) => setDOB(e.target.value)}
+          />
 
-          <Input type="radio" name="Male" placeholder="male" />
+          <Input
+            type="radio"
+            value="M"
+            name="gender"
+            checked={gender === "M"}
+            onChange={(e) => setGender(e.target.value)}
+          />
           {"Male"}
-          <Input type="radio" name="Female" />
+          <Input
+            type="radio"
+            name="gender"
+            value={"F"}
+            onChange={(e) => setGender(e.target.value)}
+            checked={gender === "F"}
+          />
           {"Female"}
         </Div1>
 
@@ -35,11 +107,18 @@ const P_Form = () => {
             <Div4>
               <Input
                 type="number"
-                name="Phone_number"
+                name="Phone_number1"
+                value={Phone_number1}
+                onChange={(e) => setPhone_number1(e.target.value)}
                 placeholder="Phone_number"
               />
 
-              <Select name="county" id="county">
+              <Select
+                name="county"
+                id="county"
+                value={county}
+                onChange={(e) => setCounty(e.target.value)}
+              >
                 <option defaultChecked>choose your county</option>
                 <option>Mombasa</option>
                 <option>Kwale</option>
@@ -75,22 +154,57 @@ const P_Form = () => {
                 <option>Uasin gishu</option>
               </Select>
             </Div4>
-            <Input type="text" name="District" placeholder="District" />
-            <Input type="text" name="Location" placeholder="Location" />
+            <Input
+              type="text"
+              name="District"
+              placeholder="District"
+              value={District}
+              onChange={(e) => setDistrict(e.target.value)}
+            />
+            <Input
+              type="text"
+              name="Location"
+              placeholder="Location"
+              value={Location}
+              onChange={(e) => setLocation(e.target.value)}
+            />
           </Div3>
           <Div5>
-            <Input type="number" name="height" placeholder="height" />
-            <Input type="number" name="weight" placeholder="weight" />
+            <Input
+              type="number"
+              name="height"
+              placeholder="height"
+              value={height}
+              onChange={(e) => setHeight(e.target.value)}
+            />
+            <Input
+              type="number"
+              name="weight"
+              placeholder="weight"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+            />
           </Div5>
         </Fieldset>
         <Fieldset>
           <Legend>emergencyperson</Legend>
           <Diva>
             <Div7>
-              <Input type="name" name="name" placeholder="name" />
+              <Input
+                type="name"
+                name="name"
+                placeholder="name"
+                value={name}
+                onChange={(e) => setname(e.target.value)}
+              />
             </Div7>
             <Div8>
-              <Select name="county" id="county">
+              <Select
+                name="relationship"
+                id="county"
+                value={relationship}
+                onChange={(e) => setrelationship(e.target.value)}
+              >
                 <option defaultChecked>Relationship</option>
                 <option>parent</option>
                 <option>spouce</option>
@@ -102,11 +216,18 @@ const P_Form = () => {
               <Input
                 type="number"
                 name="Phone_number"
+                value={Phone_number}
+                onChange={(e) => setPhone_number(e.target.value)}
                 placeholder="Phone_number"
               />
             </Div8>
             <Div9></Div9>
-            <Select name="county" id="county">
+            <Select
+              name="county2"
+              id="county"
+              value={county2}
+              onChange={(e) => setcounty2(e.target.value)}
+            >
               <option defaultChecked>choose your county</option>
               <option>Mombasa</option>
               <option>Kwale</option>
@@ -141,12 +262,19 @@ const P_Form = () => {
               <option>Trans nzoia</option>
               <option>Uasin gishu</option>
             </Select>
-            <Input type="text" name="Location" placeholder="Location" />
+            <Input
+              type="text"
+              name="Location2"
+              placeholder="Location"
+              value={Location2}
+              onChange={(e) => setLocation2(e.target.value)}
+            />
           </Diva>
         </Fieldset>
+        <button type="submit">Submit</button>
       </Form>
     </Div>
   );
 };
 
-export default P_Form;
+export default PatientForm;

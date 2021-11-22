@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const Patient = new Schema(
   {
     HPN: { type: String },
-    imageUrl: { type: String, unique: true },
+
     BIO: [
       {
         Sex: { type: String },
@@ -25,9 +25,9 @@ const Patient = new Schema(
       {
         name: { type: String },
         relationship: { type: String },
-        county: { type: String },
-        location: { type: String },
-        contact: { type: Number },
+        county1: { type: String },
+        location1: { type: String },
+        contact1: { type: Number },
       },
     ],
     account_status: {
@@ -39,6 +39,9 @@ const Patient = new Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
+    },
+    avatar: {
+      type: String,
     },
   },
   { timestamps: true }

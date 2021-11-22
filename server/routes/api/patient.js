@@ -1,9 +1,23 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
+const shortid = require("shortid");
+const multer = require("multer");
+const path = require("path");
 
 const patient = require("../../model/patient");
 const user = require("../../model/user");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + shortid.generate() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage: storage });
+
 //@ route get api/patient/test
 //@desc test user route
 //@access public
@@ -38,23 +52,29 @@ router.get(
 //@ route post api/patient
 //@desc post patient route
 //@access public
-router.post("/", async (req, res) => {
+router.post("/", upload.single("doctor-image"), async (req, res) => {
+  console.log(req.body);
+  const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
+  console.log(avatar);
+
+  res.status(200).json("hbjnkmlbhjnk");
   const {
     userId: user,
-    HPN,
-    BIO,
-    personaladdress,
-    emergencyperson,
+    HPN: shortid,
+    BIO: [sex, Height, Weight, DoB],
+    personaladdress: [contact, county, district, location],
+    emergencyperson: [name, relationship, county1, location1, contact1],
     account_status,
   } = req.body;
   try {
     const newPatient = await patient.create({
       user,
-      HPN,
-      BIO,
-      personaladdress,
-      emergencyperson,
+      HPN: shortid.generate(),
+      BIO: [sex, Height, Weight, DoB],
+      personaladdress: [contact, county, district, location],
+      emergencyperson: [name, relationship, county1, location1, contact1],
       account_status,
+      avatar,
     });
     return res.status(200).json({
       success: true,

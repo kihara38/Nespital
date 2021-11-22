@@ -24,6 +24,7 @@ const DoctorProfile = () => {
   return (
     <Main>
       <Div>
+        <input type="file" name="doctor-image" />
         <Avator src="" alt="" />
         <Name>Dr. luise lombo</Name>
         <Specialization>Dentist</Specialization>

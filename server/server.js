@@ -34,6 +34,9 @@ App.use("/api/user", User);
 App.use("/api/patient", patient);
 App.use("/api/doctor", doctor);
 
+App.use(Express.static(__dirname + "/public"));
+App.use("/uploads", Express.static("uploads"));
+
 const PORT = process.env.PORT || 5002;
 App.listen(PORT, () => {
   console.log("listening to port 5002");

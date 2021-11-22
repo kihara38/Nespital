@@ -6,7 +6,7 @@ import NavBar from "./pages/navbar";
 import Register from "./components/register";
 import Login from "./components/login";
 import PatientProfile from "./components/patientprofile";
-import P_form from "./components/patientform";
+import PatientForm from "./components/patientform";
 import DoctorProfile from "./components/doctorsprofile";
 import Consultation from "./components/consultation";
 import Booking from "./components/appointment";
@@ -48,8 +48,8 @@ function App() {
         <Route path="/patientprofile" exact>
           <PatientProfile />
         </Route>
-        <Route path="/P_form" exact>
-          <P_form />
+        <Route path="/PatientForm" exact>
+          <PatientForm />
         </Route>
         <Route path="/DoctorProfile" exact>
           <DoctorProfile />

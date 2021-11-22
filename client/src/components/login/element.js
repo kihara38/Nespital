@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Div = styled.div`
@@ -65,7 +64,7 @@ export const Input = styled.input`
     font-weight: 500;
   }
 `;
-export const Bunt = styled(Link)`
+export const Bunt = styled.button`
   width: 150px;
   height: 49px;
   border: none;

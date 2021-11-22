@@ -1,14 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const user = require("../../model/user");
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename,
-});
-const upload = multer({ storage: storage });
 
 const Appointment = require("../../model/appointment");
 
@@ -25,7 +17,6 @@ router.post("/", async (req, res) => {
     userId: user,
     disease,
     consultation,
-    imageUrl,
     approval_status,
     date,
     time,
