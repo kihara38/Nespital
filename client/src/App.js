@@ -3,13 +3,15 @@ import Footer from "./pages/footer";
 import Home from "./pages/home";
 import NavBar from "./pages/navbar";
 
-import Register from "./components/register";
+import Register from "./components/registerPatient";
 import Login from "./components/login";
 import PatientProfile from "./components/patientprofile";
 import PatientForm from "./components/patientform";
 import DoctorProfile from "./components/doctorsprofile";
 import Consultation from "./components/consultation";
 import Booking from "./components/appointment";
+import DoctorForm from "./components/doctorsform";
+import Registerdoctor from "./components/registerDoctor";
 
 function App() {
   return (
@@ -59,6 +61,12 @@ function App() {
         </Route>
         <Route path="/Consultation" exact>
           <Consultation />
+        </Route>
+        <Route path="/DoctorForm" exact>
+          <DoctorForm />
+        </Route>
+        <Route path="/Registerdoctor" exact>
+          <Registerdoctor />
         </Route>
       </Switch>
     </Router>

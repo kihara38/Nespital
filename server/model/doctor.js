@@ -7,6 +7,7 @@ const Doctor = new Schema({
   disease: { type: String },
   Consotation: { type: String },
   imageUrl: { type: String, unique: true },
+  gender: { type: String },
   experience: [
     {
       title: { type: String, required: true },

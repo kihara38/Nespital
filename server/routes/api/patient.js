@@ -61,9 +61,9 @@ router.post("/", upload.single("doctor-image"), async (req, res) => {
   const {
     userId: user,
     HPN: shortid,
-    BIO: [sex, Height, Weight, DoB],
-    personaladdress: [contact, county, district, location],
-    emergencyperson: [name, relationship, county1, location1, contact1],
+    BIO: [],
+    personaladdress: [],
+    emergencyperson: [],
     account_status,
   } = req.body;
   try {

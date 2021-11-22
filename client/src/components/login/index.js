@@ -64,7 +64,7 @@ const Login = () => {
               onChange={(e) => setpassword(e.target.value)}
             />
           </InputField>
-          <Bunt type="submit" value="sign up" to="/patientprofile">
+          <Bunt type="submit" value="sign up">
             submit
           </Bunt>
         </SignupForm>
