@@ -20,7 +20,7 @@ const Register = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [password2, setpassword2] = useState("");
-  const [role, setrole] = useState("");
+  const [role, setrole] = useState("patient");
 
   const history = useHistory();
 
@@ -91,7 +91,12 @@ const Register = () => {
               onChange={(e) => setpassword2(e.target.value)}
             />
           </InputField>
-          <Bunt type="submit" value="Signin" className="btn solid" />
+          <Bunt
+            type="submit"
+            className="btn solid"
+            value={role}
+            onSubmit={(e) => setrole(e.target.value)}
+          />
         </SigninForm>
       </Left>
       <Right>
