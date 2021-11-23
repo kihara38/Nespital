@@ -5,11 +5,11 @@ export const Nav = styled.nav`
   flex-direction: column;
   background-color: #9999f8;
   height: 100vh;
-  padding: 0.5rem;
 `;
 export const Image = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 1rem;
   img {
     width: 6rem;
     height: 6rem;
@@ -18,5 +18,9 @@ export const Image = styled.div`
     margin-bottom: 1rem;
   }
 `;
-export const Title = styled.nav``;
-export const Sub = styled.nav``;
+export const Title = styled.nav`
+  padding: 1rem;
+`;
+export const Sub = styled.nav`
+  padding: 1rem;
+`;
