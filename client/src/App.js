@@ -12,6 +12,7 @@ import Consultation from "./components/consultation";
 import Booking from "./components/appointment";
 import DoctorForm from "./components/doctorsform";
 import Registerdoctor from "./components/auth/registerDoctor";
+import Admin from "./components/auth/dashbord";
 
 function App() {
   return (
@@ -67,6 +68,9 @@ function App() {
         </Route>
         <Route path="/Registerdoctor" exact>
           <Registerdoctor />
+        </Route>
+        <Route path="/Admin" exact>
+          <Admin />
         </Route>
       </Switch>
     </Router>

@@ -14,13 +14,13 @@ import {
   Right,
 } from "./element";
 import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
-import Signin from "../../resourses/register.svg";
+import Signin from "../../../resourses/register.svg";
 const Registerdoctor = () => {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [password2, setpassword2] = useState("");
-  const [role, setrole] = useState("");
+  const [role, setrole] = useState("doctor");
 
   const history = useHistory();
 
@@ -35,7 +35,7 @@ const Registerdoctor = () => {
         password2,
         role,
       });
-      history.push("/patientForm");
+      history.push("/DoctorForm");
     } catch (error) {
       console.log(error);
     }
@@ -92,6 +92,10 @@ const Registerdoctor = () => {
             />
           </InputField>
           <Bunt type="submit" value="Signin" className="btn solid" />
+          <p>
+            sign in as {role}
+            {(e) => setrole(e.target.role)}
+          </p>
         </SigninForm>
       </Left>
       <Right>

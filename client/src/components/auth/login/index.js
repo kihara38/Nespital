@@ -1,5 +1,5 @@
 import { FaLock, FaEnvelope } from "react-icons/fa";
-import login from "../../resourses/login.svg";
+import login from "../../../resourses/login.svg";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";

@@ -69,6 +69,7 @@ export const Diva = styled.form`
 
 export const Fieldset = styled.fieldset`
   align-content: center;
+  width: 40rem;
 `;
 export const Legend = styled.legend``;
 export const Select = styled.select`

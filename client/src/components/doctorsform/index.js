@@ -1,6 +1,13 @@
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import {
+  FaGooglePlusG,
+  FaFacebookF,
+  FaTwitter,
+  FaInstagram,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 import {
   Form,
@@ -16,7 +23,6 @@ import {
   Diva,
   Fieldset,
   Legend,
-  Select,
 } from "./element";
 const DoctorForm = () => {
   const [image, setImage] = useState(null);
@@ -25,7 +31,7 @@ const DoctorForm = () => {
   const [gender, setGender] = useState("");
   const [specialization, setspecialization] = useState("");
   const [company, setcompany] = useState("");
-  const [District, setDistrict] = useState("");
+  const [facebook, setfacebook] = useState("");
   const [Location, setLocation] = useState("");
   const [from, setfrom] = useState("");
   const [to, setto] = useState("");
@@ -33,9 +39,10 @@ const DoctorForm = () => {
   const [fieldofstudy, setfieldofstudy] = useState("");
   const [school, setschool] = useState("");
   const [degree, setdegree] = useState("");
-  const [Phone_number, setPhone_number] = useState("");
-  const [county2, setcounty2] = useState("");
-  const [Location2, setLocation2] = useState("");
+  const [twitter, settwitter] = useState("");
+  const [linkedin, setlinkedin] = useState("");
+  const [google, setgoogle] = useState("");
+  const [instagram, setinstagram] = useState("");
 
   const uploadToClient = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -52,9 +59,9 @@ const DoctorForm = () => {
     body.append("doctor-image", image);
     body.append("doctorsId", doctorsId);
     body.append("gender", gender);
-    body.append("Phone_number", Phone_number);
+    body.append("twitter", twitter);
     body.append("company", company);
-    body.append("District", District);
+    body.append("facebook", facebook);
     body.append("Location", Location);
     body.append("from", from);
     body.append("to", to);
@@ -63,8 +70,9 @@ const DoctorForm = () => {
     body.append("school", school);
     body.append("degree", degree);
     body.append("specialization", specialization);
-    body.append("county2", county2);
-    body.append("Location2", Location2);
+    body.append("linkedin", linkedin);
+    body.append("google", google);
+    body.append("instagram", instagram);
 
     try {
       await axios.post("http://localhost:5002/api/patient/", body);
@@ -148,13 +156,7 @@ const DoctorForm = () => {
               </Div5>
               {to}
             </Div4>
-            <Input
-              type="text"
-              name="District"
-              placeholder="District"
-              value={District}
-              onChange={(e) => setDistrict(e.target.value)}
-            />
+
             <Input
               type="text"
               name="Location"
@@ -206,6 +208,54 @@ const DoctorForm = () => {
                 value={to}
                 onChange={(e) => setto(e.target.value)}
                 placeholder="to"
+              />
+            </Div9>
+          </Diva>
+        </Fieldset>
+        <Fieldset>
+          <Legend>Social</Legend>
+          <Diva>
+            <Div7>
+              <Input
+                placeholder="Twitter Profile URL"
+                name="twitter"
+                icon={FaTwitter}
+                value={twitter}
+                onChange={(e) => settwitter(e.target.value)}
+              />
+
+              <Input
+                placeholder="Facebook Page URL"
+                name={FaFacebookF}
+                icon="fab fa-facebook"
+                value={facebook}
+                onChange={(e) => setfacebook(e.target.value)}
+              />
+            </Div7>
+            <Div8>
+              <Input
+                placeholder="Linkedin Profile URL"
+                name="linkedin"
+                icon={FaLinkedinIn}
+                value={linkedin}
+                onChange={(e) => setlinkedin(e.target.value)}
+              />
+
+              <Input
+                placeholder="google profile URL"
+                name="google"
+                icon={FaGooglePlusG}
+                value={google}
+                onChange={(e) => setgoogle(e.target.value)}
+              />
+            </Div8>
+            <Div9>
+              <Input
+                placeholder="Instagram Page URL"
+                name={FaInstagram}
+                icon="fab fa-instagram"
+                value={instagram}
+                onChange={(e) => setinstagram(e.target.value)}
               />
             </Div9>
           </Diva>

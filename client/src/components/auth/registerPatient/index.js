@@ -14,7 +14,7 @@ import {
   Right,
 } from "./element";
 import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
-import Signin from "../../resourses/register.svg";
+import Signin from "../../../resourses/register.svg";
 const Register = () => {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -91,12 +91,11 @@ const Register = () => {
               onChange={(e) => setpassword2(e.target.value)}
             />
           </InputField>
-          <Bunt
-            type="submit"
-            className="btn solid"
-            value={role}
-            onSubmit={(e) => setrole(e.target.value)}
-          />
+          <Bunt type="submit" className="btn solid" />
+          <p>
+            sign in as {role}
+            {(e) => setrole(e.target.role)}
+          </p>
         </SigninForm>
       </Left>
       <Right>

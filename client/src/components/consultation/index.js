@@ -12,7 +12,9 @@ const Consultation = () => {
         <input type="number" placeholder="Age" />
       </Span>
       <Div2>
-        <h3>Disease:</h3>
+        <h3>
+          Disease: <input type="text" placeholder="Maralia" />
+        </h3>
         <Div3>
           <h4>Consultation</h4>
           <p>
