@@ -20,7 +20,14 @@ export const Image = styled.div`
 `;
 export const Title = styled.nav`
   padding: 1rem;
+  a {
+    margin-left: 1rem;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+  }
 `;
-export const Sub = styled.nav`
-  padding: 1rem;
+export const Sub = styled.nav``;
+export const Cover = styled.div`
+  margin-left: 1rem;
 `;

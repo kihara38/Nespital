@@ -1,9 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Nav, Image, Title, Sub } from "./element";
+import { Nav, Image, Title, Sub, Cover } from "./element";
 import { MdAddCircleOutline, MdDateRange, MdPersonAdd } from "react-icons/md";
-import { FaHome, FaUserAlt, FaRegFileAlt } from "react-icons/fa";
+import { FaHome, FaUserAlt } from "react-icons/fa";
 const Admin = () => {
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateOBjectURl] = useState(null);
@@ -41,7 +41,7 @@ const Admin = () => {
             <Link to="logout">logout</Link>
           </Sub>
         </Title>
-        <ul>
+        <Cover>
           <p>MAIN NAVIGATION </p>
           <li>
             <FaHome />
@@ -60,10 +60,10 @@ const Admin = () => {
             <div class="sub_appointment">
               <ul>
                 <li>
-                  <a href="Doctor schedule">All Doctors</a>
+                  <Link to="All Doctors">All Doctors</Link>
                 </li>
                 <li>
-                  <a href="Book appointme">Doctor's profile</a>
+                  <Link to="Doctor's profile">Doctor's profile</Link>
                 </li>
               </ul>
             </div>
@@ -84,7 +84,7 @@ const Admin = () => {
               </ul>
             </div>
           </li>
-        </ul>
+        </Cover>
       </Nav>
     </div>
   );

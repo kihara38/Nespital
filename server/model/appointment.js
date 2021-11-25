@@ -5,7 +5,6 @@ const Appointment = new Schema(
   {
     disease: { type: String },
     consultation: { type: String },
-    imageUrl: { type: String, unique: true },
     approval_status: {
       type: String,
       enum: ["Pending", "Declined", "Approved"],

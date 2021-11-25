@@ -5,14 +5,15 @@ import NavBar from "./pages/navbar";
 
 import Register from "./components/auth/registerPatient";
 import Login from "./components/auth/login";
-import PatientProfile from "./components/patientprofile";
-import PatientForm from "./components/patientform";
-import DoctorProfile from "./components/doctorsprofile";
-import Consultation from "./components/consultation";
-import Booking from "./components/appointment";
-import DoctorForm from "./components/doctorsform";
+import PatientProfile from "./components/patient/patientprofile";
+import PatientForm from "./components/patient/patientform";
+import DoctorProfile from "./components/doctor/doctorsprofile";
+import Consultation from "./components/doctor/consultation";
+import Booking from "./components/patient/appointment";
+import DoctorForm from "./components/doctor/doctorsform";
 import Registerdoctor from "./components/auth/registerDoctor";
 import Admin from "./components/auth/dashbord";
+import App_index from "./components/roles";
 
 function App() {
   return (
@@ -71,6 +72,9 @@ function App() {
         </Route>
         <Route path="/Admin" exact>
           <Admin />
+        </Route>
+        <Route path="/index" exact>
+          <App_index />
         </Route>
       </Switch>
     </Router>

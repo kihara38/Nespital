@@ -1,8 +1,9 @@
 import { FaLock, FaEnvelope } from "react-icons/fa";
 import login from "../../../resourses/login.svg";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import jwt from "jwt-decode";
 
 import {
   Div,
@@ -27,11 +28,21 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5002/api/user/login", {
-        email,
-        password,
-      });
-      history.push("/patientForm");
+      const response = await axios.post(
+        "http://localhost:5002/api/user/login",
+        {
+          email,
+          password,
+        }
+      );
+      if (response.data.success) {
+        // console.log(response);
+        const { token } = response.data;
+        const user = jwt(token);
+        localStorage.setItem("user", JSON.stringify(user));
+        // return <Redirect to="/index" />;
+        history.push("/index");
+      }
     } catch (error) {
       console.log(error);
     }
