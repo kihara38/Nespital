@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   Main,
   Div,
@@ -20,14 +21,23 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import getCurrentUser from "../../lib/auth";
 const DoctorProfile = () => {
+  const [name, setName] = useState([]);
+  const [specialization, setspecialization] = useState([]);
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    setName(user.name);
+    setspecialization(user.specialization);
+  });
   return (
     <Main>
       <Div>
         <input type="file" name="doctor-image" />
         <Avator src="" alt="" />
-        <Name>Dr. luise lombo</Name>
-        <Specialization>Dentist</Specialization>
+        <Name>DR.{name}</Name>
+        <Specialization>{specialization}</Specialization>
       </Div>
       <SocialText className="social_text">
         Or sign in with social platform

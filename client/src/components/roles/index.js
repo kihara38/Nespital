@@ -34,16 +34,12 @@ const App_index = () => {
   );
   const doctor_component = (
     <div>
-      <DoctorForm />
       <DoctorProfile />
-      <Consultation />
     </div>
   );
   const patient_component = (
     <div>
-      <PatientForm />
       <PatientProfile />
-      <Booking />
     </div>
   );
   const $403_component = (

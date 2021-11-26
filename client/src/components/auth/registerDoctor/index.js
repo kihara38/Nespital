@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import jwt from "jwt-decode";
 import {
   Div1,
   Bunt,
@@ -28,14 +29,21 @@ const Registerdoctor = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5002/api/user/", {
+      const response = await axios.post("http://localhost:5002/api/user/", {
         name,
         email,
         password,
         password2,
         role,
       });
+      console.log(response);
       history.push("/DoctorForm");
+      if (response.data.success) {
+        const { token } = response.data;
+        const user = jwt(token);
+        localStorage.setItem("user", JSON.stringify(user));
+        history.push("/DoctorForm");
+      }
     } catch (error) {
       console.log(error);
     }

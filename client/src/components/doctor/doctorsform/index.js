@@ -75,8 +75,9 @@ const DoctorForm = () => {
     body.append("instagram", instagram);
 
     try {
-      await axios.post("http://localhost:5002/api/patient/", body);
-      history.push("/patientprofile");
+      await axios.post("http://localhost:5002/api/doctor/", body);
+      history.push("/DoctorProfile");
+      console.log(body);
     } catch (error) {
       console.log(error);
     }

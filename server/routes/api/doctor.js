@@ -104,7 +104,7 @@ router.post("/consultation", async (req, res) => {
   }
 });
 
-//@ route get api/doctor/experience
+//@ route get post/doctor/experience
 //@desc test  route
 //@access public
 router.post(
@@ -121,44 +121,87 @@ router.post(
     });
   }
 );
-//@ route get api/doctor
-//@desc test user route
+//@ route get post/doctor/education
+//@desc test  route
 //@access public
-router.get("/", async (req, res) => {
-  try {
-    let doctors = await doctor.find({}).populate("user").exec();
-    return res.status(200).json({
-      success: true,
-      data: doctors,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error,
+router.post(
+  "/education",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    doctor.findOne({ userId: user }).then((doctor) => {
+      const { school, degree, fieldofstudy, from, to, current } = req.body;
+      const newEdu = { school, degree, fieldofstudy, from, to, current };
+
+      // Add to exp array
+      doctor.education.unshift(newEdu);
+      doctor.save().then((doctor) => res.json(doctor));
     });
   }
+);
 
-  // doctor.find()
-  // .then(doctors=>res.json(doctors))
-  // .catch(err=>res.status(400).json(err))
-});
+// @route   DELETE api/doctor/experience/:exp_id
+// @desc    Delete experience from doctor
+// @access  Private
+router.delete(
+  "/experience/:exp_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    doctor
+      .findOne({ userId: user })
+      .then((doctor) => {
+        // Get remove index
+        const removeIndex = doctor.experience
+          .map((item) => item.id)
+          .indexOf(req.params.exp_id);
 
-// router.post("/patient", (req, res) => {
-//   const doctorsId = req.body.doctorsId;
-//   const specialization = req.body.specialization;
-//   const disease = req.body.disease;
-//   const Consotation = req.body.Consotation;
+        // Splice out of array
+        doctor.experience.splice(removeIndex, 1);
 
-//   const patientInfo = new doctor({
-//     doctorsId,
-//     specialization,
-//     disease,
-//     Consotation,
-//   });
-//   patientInfo
-//     .save()
-//     .then(() => res.json("consotation added"))
-//     .catch((err) => res.status(400).json(err));
-// });
+        // Save
+        doctor.save().then((doctor) => res.json(doctor));
+      })
+      .catch((err) => res.status(404).json(err));
+  }
+);
+
+// @route   DELETE api/doctor/education/:edu_id
+// @desc    Delete education from doctor
+// @access  Private
+router.delete(
+  "/education/:edu_id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    doctor
+      .findOne({ userId: user })
+      .then((doctor) => {
+        // Get remove index
+        const removeIndex = doctor.education
+          .map((item) => item.id)
+          .indexOf(req.params.edu_id);
+
+        // Splice out of array
+        doctor.education.splice(removeIndex, 1);
+
+        // Save
+        doctor.save().then((doctor) => res.json(doctor));
+      })
+      .catch((err) => res.status(404).json(err));
+  }
+);
+
+// @route   DELETE api/doctor
+// @desc    Delete user and doctor
+// @access  Private
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    doctor.findOneAndRemove({ userId: user }).then(() => {
+      user
+        .findOneAndRemove({ _id: user })
+        .then(() => res.json({ success: true }));
+    });
+  }
+);
 
 module.exports = router;

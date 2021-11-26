@@ -16,7 +16,8 @@ const Home = () => {
       <Div1>
         <ButtonWrapper>
           <LinkButton to="/login">log in</LinkButton>
-          <LinkButton to="/register">sign in</LinkButton>
+          <LinkButton to="/Registerdoctor">sign up as doctor</LinkButton>
+          <LinkButton to="/register">sign up as patient</LinkButton>
         </ButtonWrapper>
 
         <Intro1>

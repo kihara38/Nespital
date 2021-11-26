@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import detail from "../../resourses/detail.svg";
+import detail from "../../../resourses/detail.svg";
 export const Div = styled.div`
   justify-content: space-between;
   background-image: url(${detail});
