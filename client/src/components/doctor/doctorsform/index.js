@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import getCurrentUser from "../../lib/auth";
 import {
   FaGooglePlusG,
   FaFacebookF,
@@ -35,6 +36,8 @@ const DoctorForm = () => {
   const [Location, setLocation] = useState("");
   const [from, setfrom] = useState("");
   const [to, setto] = useState("");
+  const [from1, setfrom1] = useState("");
+  const [to1, setto1] = useState("");
   const [title, settitle] = useState("");
   const [fieldofstudy, setfieldofstudy] = useState("");
   const [school, setschool] = useState("");
@@ -55,8 +58,10 @@ const DoctorForm = () => {
 
   const uploadToServer = async (e) => {
     e.preventDefault();
+    const user = getCurrentUser();
     const body = new FormData();
-    body.append("doctor-image", image);
+    body.append("userId", user.id);
+    body.append("patient-image", image);
     body.append("doctorsId", doctorsId);
     body.append("gender", gender);
     body.append("twitter", twitter);
@@ -65,6 +70,9 @@ const DoctorForm = () => {
     body.append("Location", Location);
     body.append("from", from);
     body.append("to", to);
+    body.append("title", title);
+    body.append("from", from1);
+    body.append("to", to1);
     body.append("title", title);
     body.append("fieldofstudy", fieldofstudy);
     body.append("school", school);
@@ -75,9 +83,18 @@ const DoctorForm = () => {
     body.append("instagram", instagram);
 
     try {
-      await axios.post("http://localhost:5002/api/doctor/", body);
-      history.push("/DoctorProfile");
-      console.log(body);
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      };
+      const response = await axios.post(
+        "http://localhost:5002/api/doctor/",
+        body,
+        config
+      );
+      if (response.data.success) {
+        history.push("/index");
+        console.log(body);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -86,7 +103,7 @@ const DoctorForm = () => {
     <Div>
       <Form onSubmit={uploadToServer}>
         <img src={createObjectURL} alt="" />
-        <input type="file" name="patient/img" onChange={uploadToClient} />
+        <input type="file" name="doctor/img" onChange={uploadToClient} />
         <Div1>
           <Input
             type="text"
@@ -199,15 +216,15 @@ const DoctorForm = () => {
               <Input
                 type="date"
                 name="from"
-                value={from}
-                onChange={(e) => setfrom(e.target.value)}
+                value={from1}
+                onChange={(e) => setfrom1(e.target.value)}
                 placeholder="from"
               />
               <Input
                 type="date"
                 name="to"
-                value={to}
-                onChange={(e) => setto(e.target.value)}
+                value={to1}
+                onChange={(e) => setto1(e.target.value)}
                 placeholder="to"
               />
             </Div9>

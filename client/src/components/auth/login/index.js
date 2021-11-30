@@ -40,6 +40,7 @@ const Login = () => {
         const { token } = response.data;
         const user = jwt(token);
         localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", token);
         // return <Redirect to="/index" />;
         history.push("/index");
       }

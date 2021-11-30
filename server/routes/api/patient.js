@@ -52,24 +52,38 @@ router.get(
 //@ route post api/patient
 //@desc post patient route
 //@access public
-router.post("/", upload.single("doctor-image"), async (req, res) => {
-  console.log(req.body);
+router.post("/", upload.single("patient-image"), async (req, res) => {
   const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
-  console.log(avatar);
-
-  res.status(200).json("hbjnkmlbhjnk");
   const { userId: user, HPN, account_status } = req.body;
+  const { contact, county, district, location } = req.body;
+  const { DoB, Weight, Height, Sex } = req.body;
+  const newPAdd = { contact, county, district, location };
+  const { name, relationship, county1, location1, contact1 } = req.body;
+  const newEme = { name, relationship, county1, location1, contact1 };
+  const bio = { DoB, Weight, Height, Sex };
+
   try {
     const newPatient = await patient.create({
+      avatar,
       user,
       HPN: shortid.generate(),
       account_status,
       avatar,
     });
-    return res.status(200).json({
-      success: true,
-      data: newPatient,
-    });
+    newPatient.BIO.unshift(bio);
+    newPatient.personaladdress.unshift(newPAdd);
+    newPatient.emergencyperson.unshift(newEme);
+
+    newPatient.save().then((patient) =>
+      res.status(200).json({
+        success: true,
+        data: patient,
+      })
+    );
+    // return res.status(200).json({
+    //   success: true,
+    //   data: newPatient,
+    // });
   } catch (error) {
     return res.status(400).json({
       success: false,
@@ -81,7 +95,7 @@ router.post("/", upload.single("doctor-image"), async (req, res) => {
 //@desc test  route
 //@access publi
 router.post(
-  "/personaladdress",
+  "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     patient.findOne({ userId: user }).then((patient) => {
@@ -98,7 +112,7 @@ router.post(
 //@desc test  route
 //@access public
 router.post(
-  "/emergencyperson",
+  "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     patient.findOne({ userId: user }).then((patient) => {

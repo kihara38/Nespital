@@ -8,6 +8,7 @@ const App = Express();
 const User = require("./routes/api/user");
 const patient = require("./routes/api/patient");
 const doctor = require("./routes/api/doctor");
+const appointment = require("./routes/api/appointment");
 //const appointment = require("./routes/api/appointment");
 App.use(cors({ extended: false }));
 App.use(Express.json());
@@ -33,6 +34,7 @@ require("./config/passport")(passport);
 App.use("/api/user", User);
 App.use("/api/patient", patient);
 App.use("/api/doctor", doctor);
+App.use("/api/appointment", appointment);
 
 App.use(Express.static(__dirname + "/public"));
 App.use("/uploads", Express.static("uploads"));

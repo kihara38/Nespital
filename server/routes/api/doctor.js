@@ -2,8 +2,20 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const user = require("../../model/user");
+const multer = require("multer");
+const path = require("path");
 
 const doctor = require("../../model/doctor");
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./uploads");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
+});
+const upload = multer({ storage: storage });
 //@ route get api/doctor
 //@desc test user route
 //@access public
@@ -51,33 +63,30 @@ router.get("/all", async (req, res) => {
   // .then(doctors=>res.json(doctors))
   // .catch(err=>res.status(400).json(err))
 });
-router.post("/", async (req, res) => {
-  const {
-    userId: user,
-    doctorsId,
-    imageUrl,
-    specialization,
-    approval_status,
-  } = req.body;
-
+router.post("/", upload.single("patient-image"), async (req, res) => {
+  const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
+  const { userId: user, doctorsId, specialization } = req.body;
+  const { title, company, location, from, to, current } = req.body;
+  const newExp = { title, company, location, from, to, current };
+  const { school, degree, fieldofstudy, from1, to1, current1 } = req.body;
+  const newEdu = { school, degree, fieldofstudy, from, to, current };
   try {
     const newDoctor = await doctor.create({
       user,
+      avatar,
       doctorsId,
-      imageUrl,
       specialization,
-      approval_status,
     });
-
-    return res.status(200).json({
-      success: true,
-      data: newDoctor,
-    });
+    newDoctor.experience.unshift(newExp);
+    newDoctor.education.unshift(newEdu);
+    newDoctor.save().then((doctor) =>
+      res.status(200).json({
+        success: true,
+        data: doctor,
+      })
+    );
   } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error,
-    });
+    return res.status(400).json(console.log(error));
   }
 });
 

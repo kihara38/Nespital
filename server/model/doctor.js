@@ -4,9 +4,9 @@ const Schema = mongoose.Schema;
 const Doctor = new Schema({
   doctorsId: { type: String },
   specialization: { type: String },
+  avatar: { type: String },
   disease: { type: String },
   consultation: { type: String },
-  imageUrl: { type: String, unique: true },
   gender: { type: String },
   experience: [
     {
@@ -23,9 +23,9 @@ const Doctor = new Schema({
       school: { type: String, required: true },
       degree: { type: String, required: true },
       fieldofstudy: { type: String },
-      from: { type: String, required: true },
-      to: { type: String },
-      current: { type: Boolean, default: true },
+      from1: { type: String, required: true },
+      to1: { type: String },
+      current1: { type: Boolean, default: true },
     },
   ],
   social: {

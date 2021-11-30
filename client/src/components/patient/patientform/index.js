@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import getCurrentUser from "../../lib/auth";
 
 import {
   Form,
@@ -25,8 +26,8 @@ const PatientForm = () => {
   const [gender, setGender] = useState("");
   const [Phone_number1, setPhone_number1] = useState("");
   const [county, setCounty] = useState("");
-  const [District, setDistrict] = useState("");
-  const [Location, setLocation] = useState("");
+  const [district, setDistrict] = useState("");
+  const [location, setLocation] = useState("");
   const [height, setHeight] = useState("");
   const [weight, setWeight] = useState("");
   const [name, setname] = useState("");
@@ -46,25 +47,37 @@ const PatientForm = () => {
 
   const uploadToServer = async (e) => {
     e.preventDefault();
+    const user = getCurrentUser();
     const body = new FormData();
-    body.append("doctor-image", image);
+    body.append("userId", user.id);
+    body.append("patient-image", image);
     body.append("DoB", DoB);
-    body.append("gender", gender);
+    body.append("Sex", gender);
     body.append("Phone_number", Phone_number);
     body.append("county", county);
-    body.append("District", District);
-    body.append("Location", Location);
-    body.append("height", height);
-    body.append("weight", weight);
+    body.append("district", district);
+    body.append("location", location);
+    body.append("Height", height);
+    body.append("Weight", weight);
     body.append("name", name);
     body.append("relationship", relationship);
     body.append("Phone_number1", Phone_number1);
-    body.append("county2", county2);
-    body.append("Location2", Location2);
+    body.append("county1", county2);
+    body.append("location1", Location2);
 
     try {
-      await axios.post("http://localhost:5002/api/patient/", body);
-      history.push("/patientprofile");
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      };
+      const response = await axios.post(
+        "http://localhost:5002/api/patient/",
+        body,
+        config
+      );
+
+      if (response.data.success) {
+        history.push("/index");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -158,14 +171,14 @@ const PatientForm = () => {
               type="text"
               name="District"
               placeholder="District"
-              value={District}
+              value={district}
               onChange={(e) => setDistrict(e.target.value)}
             />
             <Input
               type="text"
               name="Location"
               placeholder="Location"
-              value={Location}
+              value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
           </Div3>

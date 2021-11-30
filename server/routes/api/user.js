@@ -54,12 +54,26 @@ router.post("/", (req, res) => {
       newUser.password = hash;
       newUser
         .save()
-        .then(() =>
-          res.json({
-            success: true,
-            data: newUser,
-          })
-        )
+        .then((user) => {
+          const payload = {
+            id: user.id,
+            email: user.email,
+            name: user.name,
+            role: user.role,
+          };
+          //sign token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            { expiresIn: 3600 },
+            (err, token) => {
+              res.json({
+                success: true,
+                token,
+              });
+            }
+          );
+        })
         .catch((err) => res.status(400).json(err));
     });
   });

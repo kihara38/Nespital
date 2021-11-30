@@ -13,20 +13,11 @@ router.get("/test", (req, res) => res.json({ msg: "booking works" }));
 //@desc test appointment
 //@access public
 router.post("/", async (req, res) => {
-  const {
-    userId: user,
-    disease,
-    consultation,
-    approval_status,
-    date,
-    time,
-  } = req.body;
+  const { userId: user, approval_status, date, time } = req.body;
   try {
+    console.log(req.body);
     const newBooking = await Appointment.create({
       user,
-      disease,
-      consultation,
-      imageUrl,
       approval_status,
       date,
       time,
@@ -35,6 +26,7 @@ router.post("/", async (req, res) => {
       success: true,
       data: newBooking,
     });
+    console.log(req.body);
   } catch (error) {
     return res.status(400).json({
       success: false,
