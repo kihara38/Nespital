@@ -11,6 +11,7 @@ module.exports = function validateDoctorInput(data) {
   data.company = !isEmpty(data.company) ? data.company : "";
   data.title = !isEmpty(data.title) ? data.title : "";
   data.from = !isEmpty(data.from) ? data.from : "";
+  data.from1 = !isEmpty(data.from) ? data.from1 : "";
 
   if (validator.isEmpty(data.company)) {
     errors.company = "company field is required";
@@ -35,6 +36,9 @@ module.exports = function validateDoctorInput(data) {
   }
 
   if (Validator.isEmpty(data.from)) {
+    errors.from = "From date field is required";
+  }
+  if (Validator.isEmpty(data.from1)) {
     errors.from = "From date field is required";
   }
 

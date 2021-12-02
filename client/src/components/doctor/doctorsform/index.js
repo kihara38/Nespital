@@ -61,7 +61,7 @@ const DoctorForm = () => {
     const user = getCurrentUser();
     const body = new FormData();
     body.append("userId", user.id);
-    body.append("patient-image", image);
+    body.append("doctorimage", image);
     body.append("doctorsId", doctorsId);
     body.append("gender", gender);
     body.append("twitter", twitter);
@@ -71,9 +71,8 @@ const DoctorForm = () => {
     body.append("from", from);
     body.append("to", to);
     body.append("title", title);
-    body.append("from", from1);
-    body.append("to", to1);
-    body.append("title", title);
+    body.append("from1", from1);
+    body.append("to1", to1);
     body.append("fieldofstudy", fieldofstudy);
     body.append("school", school);
     body.append("degree", degree);
@@ -92,7 +91,7 @@ const DoctorForm = () => {
         config
       );
       if (response.data.success) {
-        history.push("/index");
+        history.push("/DoctorProfile");
         console.log(body);
       }
     } catch (error) {
@@ -155,7 +154,6 @@ const DoctorForm = () => {
                 name="company"
                 value={company}
                 onChange={(e) => setcompany(e.target.value)}
-                placeholder="company"
               />
               <Div5>
                 <Input

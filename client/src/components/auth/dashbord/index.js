@@ -1,7 +1,20 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Nav, Image, Title, Sub, Cover } from "./element";
+import {
+  Nav,
+  Div,
+  Image,
+  Title,
+  Sub,
+  Cover,
+  Cover2,
+  Maincover,
+  Doctor,
+  Card,
+  Doctor1,
+  Detail,
+} from "./element";
 import { MdAddCircleOutline, MdDateRange, MdPersonAdd } from "react-icons/md";
 import { FaHome, FaUserAlt } from "react-icons/fa";
 const Admin = () => {
@@ -29,62 +42,137 @@ const Admin = () => {
   return (
     <div>
       <Nav>
-        <Image>
-          <img src={createObjectURL} alt="" />
-          <input type="file" name="patient/img" onChange={uploadToClient} />
-        </Image>
-        <Title>
-          <h3>hello</h3>
-          <h1>Nelson</h1>
-          <Sub>
-            <Link to="email">email</Link>
-            <Link to="logout">logout</Link>
-          </Sub>
-        </Title>
-        <Cover>
-          <p>MAIN NAVIGATION </p>
-          <li>
-            <FaHome />
-            Dashboard
-            <MdAddCircleOutline />
-          </li>
-          <li>
-            <MdDateRange />
-            Appointments
-            <MdAddCircleOutline />
-          </li>
-          <li>
-            <MdPersonAdd />
-            Doctors
-            <MdAddCircleOutline />
-            <div class="sub_appointment">
-              <ul>
-                <li>
-                  <Link to="All Doctors">All Doctors</Link>
-                </li>
-                <li>
-                  <Link to="Doctor's profile">Doctor's profile</Link>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li>
-            <FaUserAlt />
-            Patient
-            <MdAddCircleOutline />
-            <div class="sub_appointment">
-              <ul>
-                <li>
-                  <a href="Doctor schedule">All Patients</a>
-                </li>
+        <Div>
+          <Image>
+            <img src={createObjectURL} alt="" />
+            <input type="file" name="patient/img" onChange={uploadToClient} />
+          </Image>
+          <Title>
+            <h3>hello</h3>
+            <h1>Nelson</h1>
+          </Title>
+        </Div>
+        <Sub>
+          <Link to="email">email</Link>
+          <Link to="logout">logout</Link>
+        </Sub>
+        <Maincover>
+          <Cover>
+            <p>MAIN NAVIGATION </p>
+            <li>
+              <FaHome />
+              Dashboard
+            </li>
+            <li>
+              <MdDateRange />
+              Appointments
+              <MdAddCircleOutline />
+            </li>
+            <li>
+              <MdPersonAdd />
+              Doctors
+              <MdAddCircleOutline />
+              <div class="sub_appointment">
+                <ul>
+                  <li>
+                    <Link to="#All Doctors">All Doctors</Link>
+                  </li>
+                  <li>
+                    <Link to="#Doctors approve">Doctor's approve</Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <FaUserAlt />
+              Patient
+              <MdAddCircleOutline />
+              <div class="sub_appointment">
+                <ul>
+                  <li>
+                    <a href="Doctor">All Patients</a>
+                  </li>
 
-                <li>
-                  <a href="Book appointme">Patient Profile</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        </Cover>
+                  <li>
+                    <a href="Book appointme">Patient Profile</a>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </Cover>
+          <Cover2>
+            {/* <Doctor id="All Doctors"> */}
+            {/* <code>All Doctors</code>
+              <div>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+                  <h1>DR:james</h1>
+                  <h3>specialization</h3>
+                  <button>view profile</button>
+                </Card>
+                <Card>
+                  <img src="" alt="" srcset="" />
+
+                  <h1>DR:james</h1>
+
+                  <h3>specialization</h3>
+
+                  <button>view profile</button>
+                </Card>
+              </div>
+            </Doctor> */}
+            <Doctor1 id="Doctors approve">
+              <Detail>
+                <h3>Name</h3>
+                <h3>Doctor's id</h3>
+                <h3>cv</h3>
+                <h3>status</h3>
+              </Detail>
+            </Doctor1>
+          </Cover2>
+        </Maincover>
       </Nav>
     </div>
   );

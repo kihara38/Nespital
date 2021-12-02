@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import getCurrentUser from "../../lib/auth";
 import { Div, Div1, Span, Div2, Div3, Div4 } from "./element";
 const Consultation = () => {
   const [disease, setdisease] = useState("");
@@ -8,11 +9,17 @@ const Consultation = () => {
 
   const history = useHistory();
 
+  const user = getCurrentUser();
+  const body = new FormData();
+  body.append("userId", user.id);
+
   const submit = async (e) => {
     e.preventDefault();
+    body.append("disease", disease);
+    body.append("consultation", consultation);
 
     try {
-      await axios.post("http://localhost:5002/api/doctor", {
+      await axios.post("http://localhost:5002/api/doctor/consultation/", {
         disease,
         consultation,
       });
@@ -22,7 +29,7 @@ const Consultation = () => {
     }
   };
   return (
-    <Div>
+    <Div onSubmit={submit}>
       <h1>consultation</h1>
       <Div1>
         <h3>Patient No:</h3>
@@ -52,7 +59,7 @@ const Consultation = () => {
         </Div3>
       </Div2>
       <Div4>
-        <input type="submit" onSubmit={submit} />
+        <input type="submit" />
       </Div4>
     </Div>
   );

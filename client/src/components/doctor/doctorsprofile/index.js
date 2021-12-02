@@ -34,7 +34,6 @@ const DoctorProfile = () => {
   return (
     <Main>
       <Div>
-        <input type="file" name="doctor-image" />
         <Avator src="" alt="" />
         <Name>DR.{name}</Name>
         <Specialization>{specialization}</Specialization>
