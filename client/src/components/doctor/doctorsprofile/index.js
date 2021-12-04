@@ -25,13 +25,17 @@ import getCurrentUser from "../../lib/auth";
 const DoctorProfile = () => {
   const [name, setName] = useState([]);
   const [specialization, setspecialization] = useState([]);
+  const [isDoctor, setIsDoctor] = useState(false);
 
   useEffect(() => {
     const user = getCurrentUser();
     setName(user.name);
+    if (user.role == "doctor") {
+      setIsDoctor(true);
+    }
     setspecialization(user.specialization);
   });
-  return (
+  return isDoctor ? (
     <Main>
       <Div>
         <Avator src="" alt="" />
@@ -84,6 +88,8 @@ const DoctorProfile = () => {
         <button> consultation</button>
       </Div2>
     </Main>
+  ) : (
+    <h1>401 Not authorized</h1>
   );
 };
 

@@ -3,6 +3,15 @@ const Schema = mongoose.Schema;
 
 const Appointment = new Schema(
   {
+    patientHPN: {
+      type: String,
+      required: true,
+    },
+    doctor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "doctor",
+      required: true,
+    },
     approval_status: {
       type: String,
       enum: ["Pending", "Declined", "Approved"],

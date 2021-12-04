@@ -58,15 +58,19 @@ export const Cover2 = styled.div`
 `;
 export const Doctor = styled.div`
   padding: 10px;
+  max-height: 55vh;
+  overflow: auto;
   div {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    grid-auto-flow: row;
+    display: flex;
+    flex-wrap: wrap;
   }
 `;
 export const Card = styled.div`
-  grid-auto-flow: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5px;
   align-self: center;
   width: 13rem;
   height: 18rem;

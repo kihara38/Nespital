@@ -49,7 +49,7 @@ const PatientForm = () => {
     e.preventDefault();
     const user = getCurrentUser();
     const body = new FormData();
-    body.append("userId", user.id);
+    body.append("user", user.id);
     body.append("patient-image", image);
     body.append("DoB", DoB);
     body.append("Sex", gender);
@@ -76,7 +76,7 @@ const PatientForm = () => {
       );
 
       if (response.data.success) {
-        history.push("/index");
+        history.push("/PatientProfile");
       }
     } catch (error) {
       console.log(error);

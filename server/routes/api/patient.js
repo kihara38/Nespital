@@ -27,13 +27,36 @@ router.get("/test", (req, res) => res.json({ msg: "patient works" }));
 //@desc get patient route
 //@access public
 router.get(
-  "/",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const errors = {};
     try {
       let patients = await patient
-        .findOne({ userId: user })
+        .findOne({ user: req.params.id })
+        .populate("user", ["name", "role"])
+        .exec();
+      return res.status(200).json({
+        success: true,
+        data: patients,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
+  }
+);
+
+router.get(
+  "/all",
+  // passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const errors = {};
+    try {
+      let patients = await patient
+        .find({})
         .populate("user", ["name", "role"])
         .exec();
       return res.status(200).json({
@@ -54,7 +77,7 @@ router.get(
 //@access public
 router.post("/", upload.single("patient-image"), async (req, res) => {
   const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
-  const { userId: user, HPN, account_status } = req.body;
+  const { user, HPN, account_status } = req.body;
   const { contact, county, district, location } = req.body;
   const { DoB, Weight, Height, Sex } = req.body;
   const newPAdd = { contact, county, district, location };

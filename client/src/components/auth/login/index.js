@@ -42,7 +42,15 @@ const Login = () => {
         localStorage.setItem("user", JSON.stringify(user));
         localStorage.setItem("token", token);
         // return <Redirect to="/index" />;
-        history.push("/index");
+
+        const role = user.role;
+        if (role == "patient") {
+          history.push("/index");
+        } else if (role == "doctor") {
+          history.push("/DoctorProfile");
+        } else if (role == "admin") {
+          history.push("/Admin");
+        }
       }
     } catch (error) {
       console.log(error);

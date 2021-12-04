@@ -24,22 +24,24 @@ import {
 
 const PatientProfile = () => {
   const [profile, setProfile] = useState([]);
+  const [Loading, setIsLoading] = useState(true);
   useEffect(() => {
     const user = getCurrentUser();
     const config = {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
     };
     console.log(user);
-    axios.get("/api/patient", config).then((response) => {
+    axios.get(`/api/patient/${user.id}`, config).then((response) => {
       setProfile(response.data.data);
+      setIsLoading(false);
       console.log("patient profile", response.data);
     });
   }, []);
-  if (profile === !profile) {
+  if (!Loading) {
     return (
       <MainContainer>
         <Strong>{profile.user.name}</Strong>
-        <Avator src={profile.Avator} alt="user" />
+        <Avator src={profile.avatar} alt="user" />
         <FlexContainer>
           <Container1>
             <SubContainer>

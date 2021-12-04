@@ -101,8 +101,8 @@ const Admin = () => {
             </li>
           </Cover>
           <Cover2>
-            {/* <Doctor id="All Doctors"> */}
-            {/* <code>All Doctors</code>
+            <Doctor id="All Doctors">
+              <code>All Doctors</code>
               <div>
                 <Card>
                   <img src="" alt="" srcset="" />
@@ -162,7 +162,7 @@ const Admin = () => {
                   <button>view profile</button>
                 </Card>
               </div>
-            </Doctor> */}
+            </Doctor>
             <Doctor1 id="Doctors approve">
               <Detail>
                 <h3>Name</h3>

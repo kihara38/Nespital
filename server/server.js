@@ -2,7 +2,7 @@ const Express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
-
+const morgan = require("morgan");
 const App = Express();
 
 const User = require("./routes/api/user");
@@ -13,7 +13,7 @@ const appointment = require("./routes/api/appointment");
 App.use(cors({ extended: false }));
 App.use(Express.json());
 App.use(Express.urlencoded({ extended: true }));
-
+App.use(morgan("dev"));
 //connect to mongo db
 const DB = require("./config/keys").mongoURI;
 mongoose
