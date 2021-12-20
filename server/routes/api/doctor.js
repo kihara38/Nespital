@@ -24,22 +24,26 @@ router.get("/test", (req, res) => res.json({ msg: "user works" }));
 //@ route get api/doctor
 //@desc test user route
 //@access public
-router.get("/", async (req, res) => {
-  try {
-    let doctors = await doctor
-      .findOne({ userId: user })
-      .populate("user")
-      .exec();
-    return res.status(200).json({
-      success: true,
-      data: doctors,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error,
-    });
-  }
+router.get("/id", async (req, res) => {
+  passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      const errors = {};
+      try {
+        let doctors = await doctor
+          .findOne({ user: req.params.id })
+          .populate("user", ["name", "role"])
+          .exec();
+        return res.status(200).json({
+          success: true,
+          data: doctors,
+        });
+      } catch (error) {
+        return res.status(400).json({
+          success: false,
+          message: errors,
+        });
+      }
+    };
 
   // doctor.find()
   // .then(doctors=>res.json(doctors))
@@ -63,33 +67,35 @@ router.get("/all", async (req, res) => {
   // .then(doctors=>res.json(doctors))
   // .catch(err=>res.status(400).json(err))
 });
-router.post("/", upload.single("doctorimage"), async (req, res) => {
-  const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
-  const { userId: user, doctorsId, specialization } = req.body;
-  const { title, company, location, from, to, current } = req.body;
-  const newExp = { title, company, location, from, to, current };
-  const { school, degree, fieldofstudy, from1, to1, current1 } = req.body;
-  const newEdu = { school, degree, fieldofstudy, from1, to1, current1 };
-  try {
-    console.log(avatar);
-    console.log(req.body);
-    const newDoctor = await doctor.create({
-      user,
-      avatar,
-      doctorsId,
-      specialization,
-    });
-    newDoctor.experience.unshift(newExp);
-    newDoctor.education.unshift(newEdu);
-    newDoctor.save().then((doctor) =>
-      res.status(200).json({
-        success: true,
-        data: doctor,
-      })
-    );
-  } catch (error) {
-    return res.status(400).json(console.log(error));
-  }
+router.post("/", upload.single("doctorimage"), (req, res) => {
+  doctor.findOne({ userId: user }).then((doctor) => {
+    const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
+    const { userId: user, doctorsId, specialization } = req.body;
+    const { title, company, location, from, to, current } = req.body;
+    const newExp = { title, company, location, from, to, current };
+    const { school, degree, fieldofstudy, from1, to1, current1 } = req.body;
+    const newEdu = { school, degree, fieldofstudy, from1, to1, current1 };
+    try {
+      console.log(avatar);
+      console.log(req.body);
+      const newDoctor = doctor.create({
+        user,
+        avatar,
+        doctorsId,
+        specialization,
+      });
+      newDoctor.experience.unshift(newExp);
+      newDoctor.education.unshift(newEdu);
+      newDoctor.save().then((doctor) =>
+        res.status(200).json({
+          success: true,
+          data: doctor,
+        })
+      );
+    } catch (error) {
+      return res.status(400).json(console.log(error));
+    }
+  });
 });
 
 //@ route post api/doctor/consultation
@@ -114,105 +120,5 @@ router.post("/consultation", async (req, res) => {
     });
   }
 });
-
-//@ route get post/doctor/experience
-//@desc test  route
-//@access public
-// router.post(
-//   "/experience",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     doctor.findOne({ userId: user }).then((doctor) => {
-//       const { title, company, location, from, to, current } = req.body;
-//       const newExp = { title, company, location, from, to, current };
-
-//       // Add to exp array
-//       doctor.experience.unshift(newExp);
-//       doctor.save().then((doctor) => res.json(doctor));
-//     });
-//   }
-// );
-//@ route get post/doctor/education
-//@desc test  route
-//@access public
-// router.post(
-//   "/education",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     doctor.findOne({ userId: user }).then((doctor) => {
-//       const { school, degree, fieldofstudy, from, to, current } = req.body;
-//       const newEdu = { school, degree, fieldofstudy, from, to, current };
-
-//       // Add to exp array
-//       doctor.education.unshift(newEdu);
-//       doctor.save().then((doctor) => res.json(doctor));
-//     });
-//   }
-// );
-
-// @route   DELETE api/doctor/experience/:exp_id
-// @desc    Delete experience from doctor
-// @access  Private
-// router.delete(
-//   "/experience/:exp_id",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     doctor
-//       .findOne({ userId: user })
-//       .then((doctor) => {
-//         // Get remove index
-//         const removeIndex = doctor.experience
-//           .map((item) => item.id)
-//           .indexOf(req.params.exp_id);
-
-//         // Splice out of array
-//         doctor.experience.splice(removeIndex, 1);
-
-//         // Save
-//         doctor.save().then((doctor) => res.json(doctor));
-//       })
-//       .catch((err) => res.status(404).json(err));
-//   }
-// );
-
-// @route   DELETE api/doctor/education/:edu_id
-// @desc    Delete education from doctor
-// @access  Private
-// router.delete(
-//   "/education/:edu_id",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     doctor
-//       .findOne({ userId: user })
-//       .then((doctor) => {
-//         // Get remove index
-//         const removeIndex = doctor.education
-//           .map((item) => item.id)
-//           .indexOf(req.params.edu_id);
-
-//         // Splice out of array
-//         doctor.education.splice(removeIndex, 1);
-
-//         // Save
-//         doctor.save().then((doctor) => res.json(doctor));
-//       })
-//       .catch((err) => res.status(404).json(err));
-//   }
-// );
-
-// @route   DELETE api/doctor
-// @desc    Delete user and doctor
-// @access  Private
-// router.delete(
-//   "/",
-//   passport.authenticate("jwt", { session: false }),
-//   (req, res) => {
-//     doctor.findOneAndRemove({ userId: user }).then(() => {
-//       user
-//         .findOneAndRemove({ _id: user })
-//         .then(() => res.json({ success: true }));
-//     });
-//   }
-// );
 
 module.exports = router;

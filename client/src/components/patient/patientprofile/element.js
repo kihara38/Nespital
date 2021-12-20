@@ -36,9 +36,12 @@ export const Avator = styled.img`
   margin: 10px 0px 20px 30px;
 `;
 export const SubContainer = styled.div`
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(2, 110px);
-  grid-column-gap: 5px;
+  grid-column-gap: 5px; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   font-size: 15px;
@@ -47,7 +50,13 @@ export const H11 = styled.h1`
   grid-column-start: 1;
   grid-column-end: -1;
 `;
-export const H1 = styled.h3``;
+export const H1 = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+`;
 export const Container2 = styled.h3`
   background-color: #beb9b9;
   width: 78%;
@@ -68,4 +77,4 @@ export const Text = styled.h4`
   margin-left: 2rem;
 `;
 export const P = styled.p``;
-export const Date = styled.h4``;
+export const Daze = styled.h4``;

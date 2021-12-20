@@ -24,7 +24,7 @@ const PatientForm = () => {
   const [createObjectURL, setCreateOBjectURl] = useState(null);
   const [DoB, setDOB] = useState("");
   const [gender, setGender] = useState("");
-  const [Phone_number1, setPhone_number1] = useState("");
+  const [contact, setcontact] = useState("");
   const [county, setCounty] = useState("");
   const [district, setDistrict] = useState("");
   const [location, setLocation] = useState("");
@@ -32,7 +32,7 @@ const PatientForm = () => {
   const [weight, setWeight] = useState("");
   const [name, setname] = useState("");
   const [relationship, setrelationship] = useState("");
-  const [Phone_number, setPhone_number] = useState("");
+  const [contact1, setcontact1] = useState("");
   const [county2, setcounty2] = useState("");
   const [Location2, setLocation2] = useState("");
 
@@ -53,7 +53,7 @@ const PatientForm = () => {
     body.append("patient-image", image);
     body.append("DoB", DoB);
     body.append("Sex", gender);
-    body.append("Phone_number", Phone_number);
+    body.append("contact", contact);
     body.append("county", county);
     body.append("district", district);
     body.append("location", location);
@@ -61,7 +61,7 @@ const PatientForm = () => {
     body.append("Weight", weight);
     body.append("name", name);
     body.append("relationship", relationship);
-    body.append("Phone_number1", Phone_number1);
+    body.append("contact1", contact1);
     body.append("county1", county2);
     body.append("location1", Location2);
 
@@ -120,10 +120,9 @@ const PatientForm = () => {
             <Div4>
               <Input
                 type="number"
-                name="Phone_number1"
-                value={Phone_number1}
-                onChange={(e) => setPhone_number1(e.target.value)}
-                placeholder="Phone_number"
+                name="contact"
+                value={contact}
+                onChange={(e) => setcontact(e.target.value)}
               />
 
               <Select
@@ -228,10 +227,9 @@ const PatientForm = () => {
               </Select>
               <Input
                 type="number"
-                name="Phone_number"
-                value={Phone_number}
-                onChange={(e) => setPhone_number(e.target.value)}
-                placeholder="Phone_number"
+                name="contact1"
+                value={contact1}
+                onChange={(e) => setcontact1(e.target.value)}
               />
             </Div8>
             <Div9></Div9>

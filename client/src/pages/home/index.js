@@ -8,6 +8,7 @@ import {
   Div1,
   ButtonWrapper,
   LinkButton,
+  LinkButton1,
 } from "./element";
 
 const Home = () => {
@@ -16,8 +17,8 @@ const Home = () => {
       <Div1>
         <ButtonWrapper>
           <LinkButton to="/login">log in</LinkButton>
-          <LinkButton to="/Registerdoctor">sign up as doctor</LinkButton>
-          <LinkButton to="/register">sign up as patient</LinkButton>
+          <LinkButton1 to="/Registerdoctor">sign up as doctor</LinkButton1>
+          <LinkButton1 to="/register">sign up as patient</LinkButton1>
         </ButtonWrapper>
 
         <Intro1>

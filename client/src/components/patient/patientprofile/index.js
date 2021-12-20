@@ -15,7 +15,7 @@ import {
   H4,
   H5,
   H6,
-  Date,
+  Daze,
   FlexContainer,
   Div,
   P,
@@ -25,6 +25,12 @@ import {
 const PatientProfile = () => {
   const [profile, setProfile] = useState([]);
   const [Loading, setIsLoading] = useState(true);
+
+  const getAge = (dob) => {
+    const time = new Date() - new Date(dob);
+    const age = Math.floor(time / (60 * 60 * 24 * 365 * 1000));
+    return age;
+  };
   useEffect(() => {
     const user = getCurrentUser();
     const config = {
@@ -45,24 +51,62 @@ const PatientProfile = () => {
         <FlexContainer>
           <Container1>
             <SubContainer>
-              <H11>H.P.N</H11>
-              <H1>Sex</H1>
-              <H1>Height</H1>
-              <H1>Weight</H1>
-              <H1>Age</H1>
+              <H11>
+                H.P.N:<h6>{profile.HPN}</h6>
+              </H11>
+              <H1>
+                <h3>Sex:</h3> {profile.BIO[0].Sex}
+              </H1>
+              <H1>
+                <h3>Height:</h3>
+                {profile.BIO[0].Height}
+              </H1>
+              <H1>
+                <h3>Weight:</h3>
+                {profile.BIO[0].Weight}
+              </H1>
+              <H1>
+                <h3>Age:</h3>
+                {profile && getAge(profile.BIO[0].DoB)}
+              </H1>
             </SubContainer>
             <SubContainer>
               <H11>Contact</H11>
-              <H1>county</H1>
-              <H1>district</H1>
-              <H1>location</H1>
-              <H1>contact</H1>
+              <H1>
+                <h3>county:</h3>
+                <small>{profile.personaladdress[0].county}</small>
+              </H1>
+              <H1>
+                <h3>district:</h3>
+                <p>{profile.personaladdress[0].district}</p>
+              </H1>
+              <H1>
+                <h3>location:</h3>
+                <p>{profile.personaladdress[0].location}</p>
+              </H1>
+              <H1>
+                <h3>contact:</h3>
+                <p>{profile.personaladdress[0].contact}</p>
+              </H1>
             </SubContainer>
             <SubContainer>
               <H11>Emergency</H11>
-              <H1>relationship</H1>
-              <H1>location</H1>
-              <H1>contact</H1>
+              <H1>
+                <h3>name:</h3>
+                <p>{profile.emergencyperson[0].name}</p>{" "}
+              </H1>
+              <H1>
+                <h3>relationship:</h3>
+                <p>{profile.emergencyperson[0].relationship}</p>{" "}
+              </H1>
+              <H1>
+                <h3>location:</h3>
+                <p>{profile.emergencyperson[0].location1}</p>
+              </H1>
+              <H1>
+                <h3>contact:</h3>
+                <p>{profile.emergencyperson[0].contact1}</p>
+              </H1>
             </SubContainer>
           </Container1>
           <Container2>
@@ -92,7 +136,7 @@ const PatientProfile = () => {
               </P>
             </Div>
             <H6>
-              <Date />
+              <Daze />
             </H6>
           </Container2>
         </FlexContainer>

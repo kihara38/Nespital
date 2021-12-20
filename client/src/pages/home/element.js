@@ -63,8 +63,8 @@ export const Mainsection = styled.div`
 export const Section = styled.div`
   margin-top: 0 rem;
   margin: 20px;
-  width: 450px;
-  height: 300px;
+  width: 20rem;
+  height: 20rem;
   background: rgba(82, 118, 246, 0.4);
   border-radius: 32px;
   text-align: center;
@@ -83,7 +83,24 @@ export const LinkButton = styled(Link)`
   text-decoration: none;
   margin: 8px;
   cursor: pointer;
-  font-size: 1.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  width: 100px;
+`;
+export const LinkButton1 = styled(Link)`
+  background-color: rgba(6, 6, 112);
+  border-radius: 30px;
+  color: white;
+  text-decoration: none;
+  margin: 8px;
+  cursor: pointer;
+  font-size: 0.7rem;
   text-decoration: none;
   color: white;
   text-align: center;
