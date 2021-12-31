@@ -71,6 +71,7 @@ export const Button = styled.button`
   background-color: #12f112;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
 `;
 export const Button2 = styled.button`
   width: 6rem;
@@ -79,6 +80,7 @@ export const Button2 = styled.button`
   background-color: #f8f823;
   border-radius: 10px;
   border: none;
+  cursor: pointer;
 `;
 export const Div2 = styled.button`
   display: flex;

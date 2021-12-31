@@ -6,6 +6,7 @@ const multer = require("multer");
 const path = require("path");
 
 const doctor = require("../../model/doctor");
+const Appointment = require("../../model/appointment");
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -21,52 +22,60 @@ const upload = multer({ storage: storage });
 //@access public
 router.get("/test", (req, res) => res.json({ msg: "user works" }));
 
+router.get(
+  "/all",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      let doctors = await doctor.find({}).populate("user").exec();
+      return res.status(200).json({
+        success: true,
+        data: doctors,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+
+    // doctor.find()
+    // .then(doctors=>res.json(doctors))
+    // .catch(err=>res.status(400).json(err))
+  }
+);
+
 //@ route get api/doctor
 //@desc test user route
 //@access public
-router.get("/id", async (req, res) => {
+router.get(
+  "/:id",
   passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-      const errors = {};
-      try {
-        let doctors = await doctor
-          .findOne({ user: req.params.id })
-          .populate("user", ["name", "role"])
-          .exec();
-        return res.status(200).json({
-          success: true,
-          data: doctors,
-        });
-      } catch (error) {
-        return res.status(400).json({
-          success: false,
-          message: errors,
-        });
-      }
-    };
+  async (req, res) => {
+    const errors = {};
 
-  // doctor.find()
-  // .then(doctors=>res.json(doctors))
-  // .catch(err=>res.status(400).json(err))
-});
-router.get("/all", async (req, res) => {
-  try {
-    let doctors = await doctor.find({}).populate("user").exec();
-    return res.status(200).json({
-      success: true,
-      data: doctors,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error,
-    });
+    try {
+      let doctors = await doctor
+        .findOne({ user: req.params.id })
+        .populate("user", ["name", "role"])
+        .exec();
+      console.log(doctors);
+      return res.status(200).json({
+        success: true,
+        data: doctors,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
+
+    // doctor.find()
+    // .then(doctors=>res.json(doctors))
+    // .catch(err=>res.status(400).json(err))
   }
-
-  // doctor.find()
-  // .then(doctors=>res.json(doctors))
-  // .catch(err=>res.status(400).json(err))
-});
+);
 router.post("/", upload.single("doctorimage"), (req, res) => {
   doctor.findOne({ userId: user }).then((doctor) => {
     const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
@@ -76,8 +85,6 @@ router.post("/", upload.single("doctorimage"), (req, res) => {
     const { school, degree, fieldofstudy, from1, to1, current1 } = req.body;
     const newEdu = { school, degree, fieldofstudy, from1, to1, current1 };
     try {
-      console.log(avatar);
-      console.log(req.body);
       const newDoctor = doctor.create({
         user,
         avatar,
@@ -93,7 +100,10 @@ router.post("/", upload.single("doctorimage"), (req, res) => {
         })
       );
     } catch (error) {
-      return res.status(400).json(console.log(error));
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
     }
   });
 });
@@ -120,5 +130,33 @@ router.post("/consultation", async (req, res) => {
     });
   }
 });
+
+//@ route get api/doctor/appointments/:doctorId
+//@desc test user route
+//@access public
+router.get(
+  "/appointments/:userId",
+  // passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const errors = {};
+    try {
+      let doc = await doctor.findOne({ user: req.params.userId });
+
+      let appointments = await Appointment.find({
+        doctor: doc.id,
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: appointments,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
+  }
+);
 
 module.exports = router;

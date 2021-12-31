@@ -26,6 +26,8 @@ import getCurrentUser from "../../lib/auth";
 const DoctorProfile = () => {
   const [profile, setProfile] = useState([]);
   const [Loading, setIsLoading] = useState(true);
+  const [appointmentsLoading, setAppointmentsLoading] = useState(true);
+  const [appointments, setAppointments] = useState([]);
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -38,13 +40,34 @@ const DoctorProfile = () => {
       setIsLoading(false);
       console.log("doctor profile", response.data);
     });
+
+    axios
+      .get(`/api/doctor/appointments/${user.id}`, config)
+      .then((response) => {
+        setAppointments(response.data.data);
+        setAppointmentsLoading(false);
+        console.log("doctor appointments", response.data);
+      });
   }, []);
+
+  const updateStatus = (appointmentId, status) => {
+    axios
+      .post("/api/appointment/update-status", {
+        appointmentId,
+        status,
+      })
+      .then((response) => {
+        console.log("appointment status response", response.data);
+      });
+
+    window.location.reload();
+  };
 
   if (!Loading) {
     return (
       <Main>
         <Div>
-          <Avator src="" alt="" />
+          <Avator src={profile.user.avator} alt="" />
           <Name>DR.{profile.user.name}</Name>
           <Specialization></Specialization>
         </Div>
@@ -79,17 +102,32 @@ const DoctorProfile = () => {
           </SocialIcon>
         </SocialMedia>
         <Div />
-        <Div1>
-          <h1>HPT456789</h1>
-          <Span>
-            <p>13/4/2021</p>
-            <p>08:30</p>
-          </Span>
-          <div>
-            <Button>approved</Button>
-            <Button2>Declined</Button2>
-          </div>
-        </Div1>
+        {appointmentsLoading ? (
+          <div>Appointments loading...</div>
+        ) : (
+          appointments.map((appointment, index) => (
+            <Div1>
+              <h1>{appointment.patientHPN}</h1>
+              <Span>
+                <p>{appointment.date}</p>
+                <p>{appointment.time}</p>
+              </Span>
+              <p>{appointment.approval_status}</p>
+              <div>
+                <Button
+                  onClick={() => updateStatus(appointment.id, "Approved")}
+                >
+                  Approve
+                </Button>
+                <Button2
+                  onClick={() => updateStatus(appointment.id, "Declined")}
+                >
+                  Declined
+                </Button2>
+              </div>
+            </Div1>
+          ))
+        )}
         <Div2>
           <button> consultation</button>
         </Div2>
