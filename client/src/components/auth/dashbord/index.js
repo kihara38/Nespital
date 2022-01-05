@@ -10,10 +10,6 @@ import {
   Cover,
   Cover2,
   Maincover,
-  Doctor,
-  Card,
-  Doctor1,
-  Detail,
 } from "./element";
 import { MdAddCircleOutline, MdDateRange, MdPersonAdd } from "react-icons/md";
 import { FaHome, FaUserAlt } from "react-icons/fa";
@@ -100,78 +96,7 @@ const Admin = () => {
               </div>
             </li>
           </Cover>
-          <Cover2>
-            <Doctor id="All Doctors">
-              <code>All Doctors</code>
-              <div>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-                  <h1>DR:james</h1>
-                  <h3>specialization</h3>
-                  <button>view profile</button>
-                </Card>
-                <Card>
-                  <img src="" alt="" srcset="" />
-
-                  <h1>DR:james</h1>
-
-                  <h3>specialization</h3>
-
-                  <button>view profile</button>
-                </Card>
-              </div>
-            </Doctor>
-            <Doctor1 id="Doctors approve">
-              <Detail>
-                <h3>Name</h3>
-                <h3>Doctor's id</h3>
-                <h3>cv</h3>
-                <h3>status</h3>
-              </Detail>
-            </Doctor1>
-          </Cover2>
+          <Cover2></Cover2>
         </Maincover>
       </Nav>
     </div>
