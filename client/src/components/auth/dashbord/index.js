@@ -13,6 +13,8 @@ import {
 } from "./element";
 import { MdAddCircleOutline, MdDateRange, MdPersonAdd } from "react-icons/md";
 import { FaHome, FaUserAlt } from "react-icons/fa";
+import DoctorAdmin from "../doctors admin";
+import DoctorApprove from "../doctorsApprove";
 const Admin = () => {
   const [image, setImage] = useState(null);
   const [createObjectURL, setCreateOBjectURl] = useState(null);
@@ -71,10 +73,10 @@ const Admin = () => {
               <div class="sub_appointment">
                 <ul>
                   <li>
-                    <Link to="#All Doctors">All Doctors</Link>
+                    <Link to="/DoctorAdmin">All Doctors</Link>
                   </li>
                   <li>
-                    <Link to="#Doctors approve">Doctor's approve</Link>
+                    <Link to="/DoctorApprove">Doctor's approve</Link>
                   </li>
                 </ul>
               </div>
@@ -86,7 +88,7 @@ const Admin = () => {
               <div class="sub_appointment">
                 <ul>
                   <li>
-                    <a href="Doctor">All Patients</a>
+                    <a href="/patients">All Patients</a>
                   </li>
 
                   <li>
@@ -96,7 +98,10 @@ const Admin = () => {
               </div>
             </li>
           </Cover>
-          <Cover2></Cover2>
+          <Cover2>
+            <DoctorAdmin />
+            <DoctorApprove />
+          </Cover2>
         </Maincover>
       </Nav>
     </div>

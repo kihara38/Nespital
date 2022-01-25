@@ -22,20 +22,16 @@ const upload = multer({ storage: storage });
 //@desc test user route
 //@access public
 router.get("/test", (req, res) => res.json({ msg: "patient works" }));
-
-//@ route get api/patient
+//@ route get api/patient/all
 //@desc get patient route
 //@access public
 router.get(
-  "/:id",
+  "/all",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const errors = {};
     try {
-      let patients = await patient
-        .findOne({ user: req.params.id })
-        .populate("user", ["name", "role"])
-        .exec();
+      let patients = await patient.find({}).populate("user").exec();
       return res.status(200).json({
         success: true,
         data: patients,
@@ -49,14 +45,17 @@ router.get(
   }
 );
 
+//@ route get api/patient/id
+//@desc get patient route
+//@access public
 router.get(
-  "/all",
-  // passport.authenticate("jwt", { session: false }),
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const errors = {};
     try {
       let patients = await patient
-        .find({})
+        .findOne({ user: req.params.id })
         .populate("user", ["name", "role"])
         .exec();
       return res.status(200).json({

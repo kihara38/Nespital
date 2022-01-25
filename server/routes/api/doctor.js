@@ -21,7 +21,9 @@ const upload = multer({ storage: storage });
 //@desc test user route
 //@access public
 router.get("/test", (req, res) => res.json({ msg: "user works" }));
-
+//@ route get api/doctor/all
+//@desc test doctor route
+//@access public
 router.get(
   "/all",
   passport.authenticate("jwt", { session: false }),
@@ -45,7 +47,7 @@ router.get(
   }
 );
 
-//@ route get api/doctor
+//@ route get api/doctor/id
 //@desc test user route
 //@access public
 router.get(
@@ -76,6 +78,9 @@ router.get(
     // .catch(err=>res.status(400).json(err))
   }
 );
+//@ route post api/doctor
+//@desc post doctor route
+//@access public
 router.post("/", upload.single("doctorimage"), (req, res) => {
   doctor.findOne({ userId: user }).then((doctor) => {
     const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
