@@ -5,8 +5,19 @@ const Doctor = new Schema({
   doctorsId: { type: String },
   specialization: { type: String },
   avatar: { type: String },
-  disease: { type: String },
-  consultation: { type: String },
+
+  consultation: [
+    {
+      disease: { type: String },
+      description: { type: String },
+      patient: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "patient",
+        required: true,
+      },
+    },
+  ],
+
   gender: { type: String },
   experience: [
     {

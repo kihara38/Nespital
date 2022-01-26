@@ -116,25 +116,33 @@ router.post("/", upload.single("doctorimage"), (req, res) => {
 //@ route post api/doctor/consultation
 //@desc test consultation route
 //@access public
-router.post("/consultation", async (req, res) => {
-  const { disease, consultation } = req.body;
+router.post(
+  "/consultation",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    console.log(req.body);
+    doctor.findOne({ userId: user }).then((doctor) => {
+      const { disease, description, patient } = req.body;
+      const consultation = { disease, description, patient };
 
-  try {
-    const newConsultation = await doctor.create({
-      disease,
-      consultation,
-    });
-    return res.status(200).json({
-      success: true,
-      data: newConsultation,
-    });
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: error,
+      try {
+        doctor.consultation.unshift(consultation);
+
+        doctor.save().then((doctor) =>
+          res.status(200).json({
+            success: true,
+            data: doctor,
+          })
+        );
+      } catch (error) {
+        return res.status(400).json({
+          success: false,
+          message: error,
+        });
+      }
     });
   }
-});
+);
 
 //@ route get api/doctor/appointments/:doctorId
 //@desc test user route

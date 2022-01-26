@@ -27,7 +27,7 @@ router.get("/test", (req, res) => res.json({ msg: "patient works" }));
 //@access public
 router.get(
   "/all",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const errors = {};
     try {

@@ -2,10 +2,10 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getCurrentUser from "../../lib/auth";
-import { Div, Div1, Span, Div2, Div3, Div4 } from "./element";
+import { Form, Div1, Span, Div2, Div3, Div4 } from "./element";
 const Consultation = () => {
   const [disease, setdisease] = useState("");
-  const [consultation, setconsultation] = useState("");
+  const [description, setdescription] = useState("");
   const [patient, setpatient] = useState(null);
   const [allPatients, setAllPatients] = useState([]);
   const [HPN, setHPN] = useState("");
@@ -14,18 +14,23 @@ const Consultation = () => {
 
   const user = getCurrentUser();
   const body = new FormData();
-  body.append("userId", user.id);
 
-  const submit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    body.append("disease", disease);
-    body.append("consultation", consultation);
 
     try {
-      await axios.post("http://localhost:5002/api/doctor/consultation/", {
-        disease,
-        consultation,
-      });
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      };
+      await axios.post(
+        "http://localhost:5002/api/doctor/consultation",
+        {
+          disease,
+          description,
+          patient: patient._id,
+        },
+        config
+      );
       history.push("/DoctorProfile");
     } catch (error) {
       console.log(error);
@@ -37,6 +42,7 @@ const Consultation = () => {
     const patient = allPatients.find((patient) => {
       return patient.HPN == HPN;
     });
+    console.log(patient);
     setpatient(patient);
   };
 
@@ -53,7 +59,7 @@ const Consultation = () => {
   };
 
   return (
-    <Div onSubmit={submit}>
+    <Form onSubmit={handleSubmit}>
       <h1>consultation</h1>
       <Div1>
         <h3>Patient No:</h3>
@@ -85,15 +91,15 @@ const Consultation = () => {
           <h4>Consultation</h4>
           <input
             type="text"
-            value={consultation}
-            onChange={(e) => setconsultation(e.target.value)}
+            value={description}
+            onChange={(e) => setdescription(e.target.value)}
           />
         </Div3>
       </Div2>
       <Div4>
-        <input type="submit" />
+        <button type="submit">submit</button>
       </Div4>
-    </Div>
+    </Form>
   );
 };
 

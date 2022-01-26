@@ -28,12 +28,18 @@ const DoctorAdmin = () => {
       <Doctor id="All Doctors">
         <code>All Doctors</code>
         <div>
-          <Card>
-            {profile && <img src={profile[1].user.avator} />}
-            {profile && <h1>DR:{profile[1].user.name} </h1>}
-            {profile && <h3>{profile[1].specialization}</h3>}
-            <button>view profile</button>
-          </Card>
+          {Loading ? (
+            <div>profile loading..</div>
+          ) : (
+            profile.map((profile, index) => (
+              <Card>
+                <img src={profile.avator} />
+                {/* <h1>DR:{profile.user.name} </h1> */}
+                <h3>{profile.specialization}</h3>
+                <button>view profile</button>
+              </Card>
+            ))
+          )}
         </div>
       </Doctor>
     );
