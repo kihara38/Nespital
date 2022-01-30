@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import jwt from "jwt-decode";
+import { toast } from "react-toastify";
 import {
   Div1,
   Bunt,
@@ -37,7 +38,6 @@ const Register = () => {
         role,
       });
       if (response.data.success) {
-        // console.log(response);
         const { token } = response.data;
         const user = jwt(token);
         localStorage.setItem("user", JSON.stringify(user));
@@ -45,7 +45,13 @@ const Register = () => {
         history.push("/patientForm");
       }
     } catch (error) {
-      console.log(error);
+      const ErrorMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      toast.error(ErrorMessage);
     }
   };
 

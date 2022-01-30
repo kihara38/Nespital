@@ -113,103 +113,27 @@ router.post("/", upload.single("patient-image"), async (req, res) => {
     });
   }
 });
-//@ route  post/patient/personaladdress
-//@desc test  route
-//@access publi
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    patient.findOne({ userId: user }).then((patient) => {
-      const { contact, county, district, location } = req.body;
-      const newPAdd = { contact, county, district, location };
-
-      // Add to Bio array
-      patient.personaladdress.unshift(newPAdd);
-      patient.save().then((patient) => res.json(patient));
-    });
-  }
-);
-//@ route post/patient/emergencyperson
-//@desc test  route
-//@access public
-router.post(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    patient.findOne({ userId: user }).then((patient) => {
-      const { name, relationship, county1, location1, contact1 } = req.body;
-      const newEme = { name, relationship, county1, location1, contact1 };
-
-      // Add to exp array
-      patient.emergencyperson.unshift(newEme);
-      patient.save().then((patient) => res.json(patient));
-    });
-  }
-);
-
-// @route   DELETE api/patient/experience/:exp_id
-// @desc    Delete experience from patient
-// @access  Private
-router.delete(
-  "/personaladdress/:Padd_id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    patient
-      .findOne({ userId: user })
-      .then((patient) => {
-        // Get remove index
-        const removeIndex = patient.personaladdress
-          .map((item) => item.id)
-          .indexOf(req.params.Padd_id);
-
-        // Splice out of array
-        patient.personaladdress.splice(removeIndex, 1);
-
-        // Save
-        patient.save().then((patient) => res.json(patient));
-      })
-      .catch((err) => res.status(404).json(err));
-  }
-);
-
-// @route   DELETE api/patient/education/:edu_id
-// @desc    Delete education from patient
-// @access  Private
-router.delete(
-  "/emergencyperson/:emu_id",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    patient
-      .findOne({ userId: user })
-      .then((patient) => {
-        // Get remove index
-        const removeIndex = patient.emergencyperson
-          .map((item) => item.id)
-          .indexOf(req.params.emu_id);
-
-        // Splice out of array
-        patient.emergencyperson.splice(removeIndex, 1);
-
-        // Save
-        patient.save().then((patient) => res.json(patient));
-      })
-      .catch((err) => res.status(404).json(err));
-  }
-);
-
 // @route   DELETE api/patient
 // @desc    Delete user and patient
 // @access  Private
+
 router.delete(
-  "/",
+  "/:id",
   passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    patient.findOneAndRemove({ userId: user }).then(() => {
-      user
-        .findOneAndRemove({ _id: user })
-        .then(() => res.json({ success: true }));
-    });
+  async (req, res) => {
+    const errors = {};
+    try {
+      let patients = await patient.findOneAndRemove({ userId: user });
+      return res.status(200).json({
+        success: true,
+        data: patients,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
   }
 );
 

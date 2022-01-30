@@ -29,6 +29,7 @@ export const SigninForm = styled.form`
   grid-column: 1 / 2;
   grid-row: 1 / 2;
   background-clip: circle();
+  overflow: hidden;
 `;
 
 export const FormSignin = styled.form`
@@ -55,6 +56,7 @@ export const InputField = styled.div`
   display: grid;
   grid-template-columns: 15% 85%;
   padding: 0.4rem;
+  overflow: hidden;
 `;
 export const I = styled.i`
   text-align: center;

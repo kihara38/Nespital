@@ -30,14 +30,21 @@ router.post("/", (req, res) => {
   const { errors, isValid } = ValidateRegisterInput(req.body);
   //check validation
   if (!isValid) {
-    return res.status(400).json(errors);
+    return res.status(400).json({
+      message: `${errors.name ? errors.name : ""}   ${
+        errors.email ? errors.email : ""
+      }  ${errors.password ? errors.password : ""}  ${
+        errors.password2 ? errors.password2 : ""
+      } `,
+      success: false,
+    });
   }
 
   User.findOne({ email: req.body.email }).then((user) => {
     if (user) {
       return res.status(400).json({
         success: false,
-        email: "Email already exists",
+        message: "Email already exists",
       });
     }
   });
@@ -74,7 +81,12 @@ router.post("/", (req, res) => {
             }
           );
         })
-        .catch((err) => res.status(400).json(err));
+        .catch((err) =>
+          res.status(400).json({
+            message: "Something went wrong",
+            success: false,
+          })
+        );
     });
   });
 });
@@ -85,7 +97,12 @@ router.post("/login", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
   //check validation
   if (!isValid) {
-    return res.status(400).json(errors);
+    return res.status(400).json({
+      message: `${errors.email ? errors.email : ""}  ${
+        errors.password ? errors.password : ""
+      }`,
+      success: false,
+    });
   }
 
   const { email, password } = req.body;
@@ -96,7 +113,7 @@ router.post("/login", (req, res) => {
     if (!user) {
       return res.status(404).json({
         success: false,
-        email: "user not found",
+        message: "user not found",
       });
     }
     //check password
@@ -118,7 +135,7 @@ router.post("/login", (req, res) => {
       } else {
         return res.status(400).json({
           success: false,
-          password: "password incorrect",
+          message: "incorrect credentials please try again",
         });
       }
     });

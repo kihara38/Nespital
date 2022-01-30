@@ -26,7 +26,7 @@ import {
   Legend,
 } from "./element";
 const DoctorForm = () => {
-  const [img, setImage] = useState(null);
+  const [image, setImage] = useState(null);
   const [createObjectURL, setCreateOBjectURl] = useState(null);
   const [doctorsId, setdoctorsId] = useState("");
   const [gender, setGender] = useState("");
@@ -61,7 +61,7 @@ const DoctorForm = () => {
     const user = getCurrentUser();
     const body = new FormData();
     body.append("userId", user.id);
-    body.append("doctorpng", img);
+    body.append("doctorimage", image);
     body.append("doctorsId", doctorsId);
     body.append("gender", gender);
     body.append("twitter", twitter);

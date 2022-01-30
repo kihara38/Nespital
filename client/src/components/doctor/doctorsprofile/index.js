@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
   Main,
   Div,
@@ -28,46 +29,46 @@ const DoctorProfile = () => {
   const [Loading, setIsLoading] = useState(true);
   const [appointmentsLoading, setAppointmentsLoading] = useState(true);
   const [appointments, setAppointments] = useState([]);
+  const [user, setUser] = useState(null);
+  const history = useHistory();
 
-  useEffect(() => {
-    const user = getCurrentUser();
-    const config = {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    };
-    console.log(user);
-    axios.get(`/api/doctor/${user.id}`, config).then((response) => {
-      setProfile(response.data.data);
-      setIsLoading(false);
-      console.log("doctor profile", response.data);
-    });
-
-    axios
-      .get(`/api/doctor/appointments/${user.id}`, config)
-      .then((response) => {
-        setAppointments(response.data.data);
-        setAppointmentsLoading(false);
-        console.log("doctor appointments", response.data);
-      });
-  }, []);
-
-  const updateStatus = (appointmentId, status) => {
-    axios
-      .post("/api/appointment/update-status", {
-        appointmentId,
-        status,
-      })
-      .then((response) => {
-        console.log("appointment status response", response.data);
-      });
-
+  const Logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     window.location.reload();
   };
 
-  if (!Loading) {
+  useEffect(() => {
+    const user = getCurrentUser();
+    if (user) {
+      setUser(user);
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      };
+      console.log(user);
+      axios.get(`/api/doctor/${user.id}`, config).then((response) => {
+        setProfile(response.data.data);
+        setIsLoading(false);
+        console.log("doctor profile", response.data);
+      });
+
+      axios
+        .get(`/api/doctor/appointments/${user.id}`, config)
+        .then((response) => {
+          setAppointments(response.data.data);
+          setAppointmentsLoading(false);
+          console.log("doctor appointments", response.data);
+        });
+    } else {
+      history.push("/login");
+    }
+  }, []);
+
+  if (!Loading && user) {
     return (
       <Main>
         <Div>
-          <Avator src={profile.user.avator} alt="" />
+          <Avator src={profile.avatar} alt="" />
           <Name>DR.{profile.user.name}</Name>
           <Specialization></Specialization>
         </Div>
@@ -105,31 +106,15 @@ const DoctorProfile = () => {
         {appointmentsLoading ? (
           <div>Appointments loading...</div>
         ) : (
-          appointments.map((appointment, index) => (
-            <Div1>
-              <h1>{appointment.patientHPN}</h1>
-              <Span>
-                <p>{appointment.date}</p>
-                <p>{appointment.time}</p>
-              </Span>
-              <p>{appointment.approval_status}</p>
-              <div>
-                <Button
-                  onClick={() => updateStatus(appointment.id, "Approved")}
-                >
-                  Approve
-                </Button>
-                <Button2
-                  onClick={() => updateStatus(appointment.id, "Declined")}
-                >
-                  Declined
-                </Button2>
-              </div>
-            </Div1>
+          appointments.map((appointment) => (
+            <AppointmentCard appointment={appointment} key={appointment._id} />
           ))
         )}
         <Div2>
           <button> consultation</button>
+        </Div2>
+        <Div2>
+          <button onClick={Logout}> Log out</button>
         </Div2>
       </Main>
     );
@@ -138,3 +123,60 @@ const DoctorProfile = () => {
   }
 };
 export default DoctorProfile;
+
+const AppointmentCard = ({ appointment }) => {
+  const [status, setStatus] = useState(appointment.approval_status);
+
+  const approve = () => {
+    axios
+      .post("/api/appointment/update-status", {
+        appointmentId: appointment._id,
+        status: "Approved",
+      })
+      .then((response) => {
+        setStatus(response.data.data.approval_status);
+        console.log("appointment status response", response.data);
+      });
+  };
+  const decline = () => {
+    axios
+      .post("/api/appointment/update-status", {
+        appointmentId: appointment._id,
+        status: "Declined",
+      })
+      .then((response) => {
+        setStatus(response.data.data.approval_status);
+        console.log("appointment status response", response.data);
+      });
+  };
+
+  const updateStatus = (appointmentId, status) => {};
+  return (
+    <Div1>
+      <h1>{appointment.patientHPN}</h1>
+      <Span>
+        <p>{appointment.date}</p>
+        <p>{appointment.time}</p>
+      </Span>
+      <p>{status}</p>
+      <div>
+        <Button
+          onClick={approve}
+          disabled={status !== "Pending"}
+          style={{ opacity: status === "Approved" ? 0.6 : 1 }}
+        >
+          Approve
+        </Button>
+        {status !== "Approved" && (
+          <Button2
+            onClick={decline}
+            disabled={status !== "Pending"}
+            style={{ opacity: status !== "Pending" ? 0.6 : 1 }}
+          >
+            Declined
+          </Button2>
+        )}
+      </div>
+    </Div1>
+  );
+};

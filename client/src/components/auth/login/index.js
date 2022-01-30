@@ -4,6 +4,7 @@ import { useHistory, Redirect } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import jwt from "jwt-decode";
+import { toast } from "react-toastify";
 
 import {
   Div,
@@ -53,7 +54,13 @@ const Login = () => {
         }
       }
     } catch (error) {
-      console.log(error);
+      const ErrorMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      toast.error(ErrorMessage);
     }
   };
   return (

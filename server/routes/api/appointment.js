@@ -42,19 +42,22 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.post("/update-status", (req, res) => {
+router.post("/update-status", async (req, res) => {
   // get the body params
   const { appointmentId, status } = req.body;
   // fetch appointment then update
   try {
-    Appointment.findOne({ id: appointmentId }).then((appointment) => {
-      appointment.approval_status = status;
-      appointment.save().then((appointment) =>
-        res.json({
-          success: true,
-          data: appointment,
-        })
-      );
+    let updatedAppointment = await Appointment.findByIdAndUpdate(
+      appointmentId,
+      {
+        approval_status: status,
+      },
+      { new: true }
+    );
+
+    return res.status(200).json({
+      success: true,
+      data: updatedAppointment,
     });
   } catch (error) {
     console.log(error);

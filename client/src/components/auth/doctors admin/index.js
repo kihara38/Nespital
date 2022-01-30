@@ -34,9 +34,9 @@ const DoctorAdmin = () => {
             profile.map((profile, index) => (
               <Card>
                 <img src={profile.avator} />
-                {/* <h1>DR:{profile.user.name} </h1> */}
+                <h1>DR:{profile.user.name} </h1>
                 <h3>{profile.specialization}</h3>
-                <button>view profile</button>
+                <button>Delete</button>
               </Card>
             ))
           )}

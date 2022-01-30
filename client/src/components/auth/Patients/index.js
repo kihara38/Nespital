@@ -32,12 +32,20 @@ const Patients = () => {
         <h3>phone number</h3>
         <h3>emergency number</h3>
       </Detail>
-      <List>
-        {/* <h3>{profile.user.name}</h3>
-        <h3>{profile.HPN}</h3>
-        <h3>{profile.personaladdress.contact}</h3>
-        <h3>{profile.emergencyperson.contact1}</h3> */}
-      </List>
+      <div>
+        {Loading ? (
+          <div>profile loading..</div>
+        ) : (
+          profile.map((profile, index) => (
+            <List>
+              <h3>{profile.user.name}</h3>
+              <h3>{profile.HPN}</h3>
+              <h3>{profile.personaladdress[0].contact}</h3>
+              <h3>{profile.emergencyperson[0].contact1}</h3>
+            </List>
+          ))
+        )}
+      </div>
     </Doctor1>
   );
   // } else {

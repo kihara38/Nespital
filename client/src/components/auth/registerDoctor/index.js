@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import jwt from "jwt-decode";
+import { toast } from "react-toastify";
 import {
   Div1,
   Bunt,
@@ -36,7 +37,7 @@ const Registerdoctor = () => {
         password2,
         role,
       });
-      console.log(response);
+
       history.push("/DoctorForm");
       if (response.data.success) {
         const { token } = response.data;
@@ -45,7 +46,13 @@ const Registerdoctor = () => {
         history.push("/DoctorForm");
       }
     } catch (error) {
-      console.log(error);
+      const ErrorMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      toast.error(ErrorMessage); 
     }
   };
 

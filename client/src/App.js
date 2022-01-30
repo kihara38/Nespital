@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Footer from "./pages/footer";
 import Home from "./pages/home";
 import NavBar from "./pages/navbar";
@@ -21,6 +23,7 @@ import Patients from "./components/auth/Patients";
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Switch>
         <Route path="/" exact>
           <NavBar />

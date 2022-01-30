@@ -82,29 +82,40 @@ router.get(
 //@desc post doctor route
 //@access public
 router.post("/", upload.single("doctorimage"), (req, res) => {
-  doctor.findOne({ userId: user }).then((doctor) => {
+  user.findById(req.body.userId).then((user) => {
     const avatar = `http://localhost:5002/uploads/${req.file.filename}`;
-    const { userId: user, doctorsId, specialization } = req.body;
+    const { doctorsId, specialization } = req.body;
     const { title, company, location, from, to, current } = req.body;
     const newExp = { title, company, location, from, to, current };
     const { school, degree, fieldofstudy, from1, to1, current1 } = req.body;
     const newEdu = { school, degree, fieldofstudy, from1, to1, current1 };
     try {
-      const newDoctor = doctor.create({
-        user,
-        avatar,
-        doctorsId,
-        specialization,
-      });
-      newDoctor.experience.unshift(newExp);
-      newDoctor.education.unshift(newEdu);
-      newDoctor.save().then((doctor) =>
-        res.status(200).json({
-          success: true,
-          data: doctor,
+      //restrict same user id == doctors.findOne({user: user._id})
+
+      const newDoctor = doctor
+        .create({
+          user: user._id,
+          avatar,
+          doctorsId,
+          specialization,
+          experience: newExp,
+          education: newEdu,
         })
-      );
+        .then(() => {
+          return res.status(200).json({
+            success: true,
+            data: newDoctor,
+          });
+        })
+        .catch((error) => {
+          return res.status(400).json({
+            success: false,
+            message: error,
+          });
+        });
     } catch (error) {
+      console.log({ didntPass: error });
+
       return res.status(400).json({
         success: false,
         message: error,
@@ -162,6 +173,56 @@ router.get(
       return res.status(200).json({
         success: true,
         data: appointments,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
+  }
+);
+// @route   DELETE api/patient
+// @desc    Delete user and patient
+// @access  Private
+router.delete(
+  "/appointments/:userId",
+  // passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const errors = {};
+    try {
+      let doc = await doctor.find({ user: req.params.userId });
+
+      let appointments = await Appointment.findOneAndRemove({
+        doctor: doc.id,
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: appointments,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
+  }
+);
+// @route   DELETE api/patient
+// @desc    Delete user and patient
+// @access  Private
+
+router.delete(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const errors = {};
+    try {
+      let dooctors = await doctor.findOneAndRemove({ userId: user });
+      return res.status(200).json({
+        success: true,
+        data: doctors,
       });
     } catch (error) {
       return res.status(400).json({
