@@ -9,10 +9,11 @@ const Consultation = () => {
   const [patient, setpatient] = useState(null);
   const [allPatients, setAllPatients] = useState([]);
   const [HPN, setHPN] = useState("");
+  const [user, setUser] = useState(null);
 
   const history = useHistory();
 
-  const user = getCurrentUser();
+  const User = getCurrentUser();
   const body = new FormData();
 
   const handleSubmit = async (e) => {
@@ -78,24 +79,23 @@ const Consultation = () => {
         />
       </Span>
       <Div2>
-        <h3>
-          Disease:{" "}
-          <input
-            type="text"
-            placeholder="Maralia"
-            value={disease}
-            onChange={(e) => setdisease(e.target.value)}
-          />
-        </h3>
-        <Div3>
-          <h4>Consultation</h4>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setdescription(e.target.value)}
-          />
-        </Div3>
+        <h3>Disease:</h3>
+        <input
+          type="text"
+          placeholder="Maralia"
+          value={disease}
+          onChange={(e) => setdisease(e.target.value)}
+        />
       </Div2>
+      <Div3>
+        <h4>Consultation:</h4>
+        <textarea
+          type="text"
+          value={description}
+          onChange={(e) => setdescription(e.target.value)}
+        />
+      </Div3>
+
       <Div4>
         <button type="submit">submit</button>
       </Div4>

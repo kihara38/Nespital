@@ -23,29 +23,25 @@ import Patients from "./components/auth/Patients";
 function App() {
   return (
     <Router>
+      <NavBar />
       <ToastContainer />
       <Switch>
         <Route path="/" exact>
-          <NavBar />
           <Home />
         </Route>
         <Route path="/About" exact>
-          <NavBar />
           <h1>About</h1>
           <Footer />
         </Route>
         <Route path="/appointment" exact>
-          <NavBar />
           <h1>appointment</h1>
           <Footer />
         </Route>
         <Route path="/patient" exact>
-          <NavBar />
           <h1>patient</h1>
           <Footer />
         </Route>
         <Route path="/doctor" exact>
-          <NavBar />
           <h1>doctor</h1>
           <Footer />
         </Route>

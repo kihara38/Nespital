@@ -124,6 +124,10 @@ router.post("/", upload.single("doctorimage"), (req, res) => {
   });
 });
 
+//@ route get api/doctor/consultation
+//@desc test consultation route
+//@access public
+
 //@ route post api/doctor/consultation
 //@desc test consultation route
 //@access public

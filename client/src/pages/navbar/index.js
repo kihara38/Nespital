@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   Nav,
   Logo,
@@ -10,6 +11,11 @@ import {
 } from "./element";
 const NavBar = () => {
   const [open, setopen] = useState(true);
+  const Logout = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
 
   const HandleMenuOpen = () => {
     setopen(!open);
@@ -22,7 +28,7 @@ const NavBar = () => {
         </Logo>
         <MenuIcon onClick={HandleMenuOpen} />
       </div>
-      <Ul>
+      <Ul open={open}>
         <Alink to="/">Home</Alink>
 
         <Alink to="/about">About</Alink>
@@ -32,6 +38,7 @@ const NavBar = () => {
         <Alink to="/patient">Patient</Alink>
 
         <Alink to="/doctor">Doctor</Alink>
+        <button onClick={Logout}> Log out</button>
       </Ul>
     </Nav>
   );

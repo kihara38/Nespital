@@ -7,6 +7,7 @@ export const Div = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 94, 0.521);
   position: relative;
+  /* z-index: -1; */
 `;
 
 export const Left = styled.div`
@@ -14,6 +15,9 @@ export const Left = styled.div`
 `;
 export const Right = styled.div`
   width: 50%;
+  @media (max-width: 760px) {
+    display: none;
+  }
 `;
 export const LoginImage = styled.img`
   width: 100%;
@@ -92,7 +96,10 @@ export const Clip = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -10;
   background-color: purple;
   clip-path: circle(47.1% at 29% 4%);
+  @media (max-width: 790px) {
+    clip-path: circle(50% at 50% 30%);
+  }
 `;

@@ -18,6 +18,7 @@ import {
   Div3,
   Div4,
   Div5,
+  Div6,
   Div7,
   Div8,
   Div9,
@@ -104,20 +105,22 @@ const DoctorForm = () => {
         <img src={createObjectURL} alt="" />
         <input type="file" name="doctor/img" onChange={uploadToClient} />
         <Div1>
-          <Input
-            type="text"
-            name="doctorsId"
-            value={doctorsId}
-            onChange={(e) => setdoctorsId(e.target.value)}
-            placeholder="doctorsId"
-          />
-          <Input
-            type="text"
-            name="specialization"
-            value={specialization}
-            onChange={(e) => setspecialization(e.target.value)}
-            placeholder="specialization"
-          />
+          <Div9>
+            <Input
+              type="text"
+              name="doctorsId"
+              value={doctorsId}
+              onChange={(e) => setdoctorsId(e.target.value)}
+              placeholder="doctorsId"
+            />
+            <Input
+              type="text"
+              name="specialization"
+              value={specialization}
+              onChange={(e) => setspecialization(e.target.value)}
+              placeholder="specialization"
+            />
+          </Div9>
           <br />
           <br />
           <Input
@@ -144,7 +147,7 @@ const DoctorForm = () => {
             <Div4>
               <Input
                 type="text"
-                name="company"
+                name="title"
                 value={title}
                 onChange={(e) => settitle(e.target.value)}
                 placeholder="title"
@@ -154,37 +157,38 @@ const DoctorForm = () => {
                 name="company"
                 value={company}
                 onChange={(e) => setcompany(e.target.value)}
+                placeholder="company"
               />
-              <Div5>
-                <Input
-                  type="date"
-                  name="from"
-                  value={from}
-                  onChange={(e) => setfrom(e.target.value)}
-                />
-                {from}
-                <Input
-                  type="date"
-                  name="to"
-                  value={to}
-                  onChange={(e) => setto(e.target.value)}
-                />
-              </Div5>
-              {to}
             </Div4>
+            <Div5>
+              <Input
+                type="date"
+                name="from"
+                value={from}
+                onChange={(e) => setfrom(e.target.value)}
+              />
 
-            <Input
-              type="text"
-              name="Location"
-              placeholder="Location"
-              value={Location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
+              <Input
+                type="date"
+                name="to"
+                value={to}
+                onChange={(e) => setto(e.target.value)}
+              />
+            </Div5>
+            <Div6>
+              <Input
+                type="text"
+                name="Location"
+                placeholder="Location"
+                value={Location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </Div6>
           </Div3>
         </Fieldset>
         <Fieldset>
           <Legend>education</Legend>
-          <Diva>
+          <Div3>
             <Div7>
               <Input
                 type="text"
@@ -210,7 +214,7 @@ const DoctorForm = () => {
                 placeholder="fieldofstudy"
               />
             </Div8>
-            <Div9>
+            <Div5>
               <Input
                 type="date"
                 name="from"
@@ -225,12 +229,12 @@ const DoctorForm = () => {
                 onChange={(e) => setto1(e.target.value)}
                 placeholder="to"
               />
-            </Div9>
-          </Diva>
+            </Div5>
+          </Div3>
         </Fieldset>
         <Fieldset>
           <Legend>Social</Legend>
-          <Diva>
+          <Div3>
             <Div7>
               <Input
                 placeholder="Twitter Profile URL"
@@ -248,7 +252,7 @@ const DoctorForm = () => {
                 onChange={(e) => setfacebook(e.target.value)}
               />
             </Div7>
-            <Div8>
+            <Div4>
               <Input
                 placeholder="Linkedin Profile URL"
                 name="linkedin"
@@ -264,7 +268,7 @@ const DoctorForm = () => {
                 value={google}
                 onChange={(e) => setgoogle(e.target.value)}
               />
-            </Div8>
+            </Div4>
             <Div9>
               <Input
                 placeholder="Instagram Page URL"
@@ -274,7 +278,7 @@ const DoctorForm = () => {
                 onChange={(e) => setinstagram(e.target.value)}
               />
             </Div9>
-          </Diva>
+          </Div3>
         </Fieldset>
         <button type="submit">Submit</button>
       </Form>

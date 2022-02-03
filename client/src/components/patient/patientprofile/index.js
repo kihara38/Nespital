@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import getCurrentUser from "../../lib/auth";
 import {
   MainContainer,
@@ -25,6 +26,8 @@ import {
 const PatientProfile = () => {
   const [profile, setProfile] = useState([]);
   const [Loading, setIsLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const history = useHistory();
 
   const getAge = (dob) => {
     const time = new Date() - new Date(dob);
@@ -33,15 +36,20 @@ const PatientProfile = () => {
   };
   useEffect(() => {
     const user = getCurrentUser();
-    const config = {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    };
-    console.log(user);
-    axios.get(`/api/patient/${user.id}`, config).then((response) => {
-      setProfile(response.data.data);
-      setIsLoading(false);
-      console.log("patient profile", response.data);
-    });
+    if (user) {
+      setUser(user);
+      const config = {
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      };
+      console.log(user);
+      axios.get(`/api/patient/${user.id}`, config).then((response) => {
+        setProfile(response.data.data);
+        setIsLoading(false);
+        console.log("patient profile", response.data);
+      });
+    } else {
+      history.push("/login");
+    }
   }, []);
   if (!Loading) {
     return (

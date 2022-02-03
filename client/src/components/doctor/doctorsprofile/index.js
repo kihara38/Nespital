@@ -15,6 +15,7 @@ import {
   Button,
   Button2,
   Span,
+  Const,
 } from "./element";
 import {
   FaGooglePlusG,
@@ -31,12 +32,6 @@ const DoctorProfile = () => {
   const [appointments, setAppointments] = useState([]);
   const [user, setUser] = useState(null);
   const history = useHistory();
-
-  const Logout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
-    window.location.reload();
-  };
 
   useEffect(() => {
     const user = getCurrentUser();
@@ -102,6 +97,7 @@ const DoctorProfile = () => {
             </i>
           </SocialIcon>
         </SocialMedia>
+
         <Div />
         {appointmentsLoading ? (
           <div>Appointments loading...</div>
@@ -110,12 +106,7 @@ const DoctorProfile = () => {
             <AppointmentCard appointment={appointment} key={appointment._id} />
           ))
         )}
-        <Div2>
-          <button> consultation</button>
-        </Div2>
-        <Div2>
-          <button onClick={Logout}> Log out</button>
-        </Div2>
+        <Const to="/Consultation">consultation</Const>
       </Main>
     );
   } else {
