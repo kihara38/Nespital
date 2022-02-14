@@ -83,26 +83,28 @@ const Booking = () => {
             justifyItems: "center",
           }}
         >
-          <Box sx={{ width: 300, textAlign: "center " }}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">
-                Select Doctor
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={doctorId}
-                label="Select Doctor"
-                onChange={handleChange}
-              >
-                {doctors.map(({ _id, user }, index) => (
-                  <MenuItem value={_id} key={_id}>
-                    {user.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
+          <Div1>
+            <Box sx={{ width: 300, textAlign: "center " }}>
+              <FormControl fullWidth>
+                <InputLabel id="demo-simple-select-label">
+                  Select Doctor
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={doctorId}
+                  label="Select Doctor"
+                  onChange={handleChange}
+                >
+                  {doctors.map(({ _id, user }, index) => (
+                    <MenuItem value={_id} key={_id}>
+                      {user.name}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Box>
+          </Div1>
         </div>
       )}
       <Div2>

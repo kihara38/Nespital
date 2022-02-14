@@ -19,12 +19,15 @@ import {
   Daze,
   FlexContainer,
   Div,
+  Div1,
   P,
   Text,
+  Alink,
 } from "./element";
 
 const PatientProfile = () => {
   const [profile, setProfile] = useState([]);
+  const [Consult, setConsult] = useState([]);
   const [Loading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
   const history = useHistory();
@@ -47,6 +50,10 @@ const PatientProfile = () => {
         setIsLoading(false);
         console.log("patient profile", response.data);
       });
+      axios.get(`/api/doctor/consultation`, config).then((response) => {
+        setConsult(response.data.data);
+        setIsLoading(false);
+      });
     } else {
       history.push("/login");
     }
@@ -54,8 +61,10 @@ const PatientProfile = () => {
   if (!Loading) {
     return (
       <MainContainer>
-        <Strong>{profile.user.name}</Strong>
-        <Avator src={profile.avatar} alt="user" />
+        <Div1>
+          <Strong>{profile.user.name}</Strong>
+          <Avator src={profile.avatar} alt="user" />
+        </Div1>
         <FlexContainer>
           <Container1>
             <SubContainer>
@@ -119,10 +128,6 @@ const PatientProfile = () => {
           </Container1>
           <Container2>
             <Div>
-              <H2>Hospital</H2>
-              <Text>ST.MARY'S</Text>
-            </Div>
-            <Div>
               <H3>Doctor</H3>
               <Text>DR.KIHARA NELSON</Text>
             </Div>
@@ -132,22 +137,18 @@ const PatientProfile = () => {
             </Div>
             <Div>
               <H4>Disease</H4>
-              <Text>MARALIA</Text>
+              <Text>{Consult[0].disease}</Text>
             </Div>
             <Div>
               <H5>consotation</H5>
-              <P>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia
-                accusamus magnam adipisci ab doloremque quos iure architecto
-                labore asperiores magni commodi, voluptates, esse atque
-                assumenda. Officia vero saepe maxime nihil.
-              </P>
+              <P>{Consult[0].description}</P>
             </Div>
             <H6>
               <Daze />
             </H6>
           </Container2>
         </FlexContainer>
+        <Alink to="/Booking">BOOK CONSULTATION</Alink>
       </MainContainer>
     );
   } else {

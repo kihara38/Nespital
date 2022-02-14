@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import img from "../../../resourses/Doctor.svg";
+import { Link } from "react-router-dom";
 
 export const MainContainer = styled.div`
   background-image: url(${img});
@@ -9,23 +10,40 @@ export const MainContainer = styled.div`
   flex-direction: column;
   height: 100%;
 `;
+export const Div1 = styled.div`
+  padding-top: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem;
+`;
 export const Strong = styled.p`
-  font-size: 40px;
+  font-size: 60px;
+  font-weight: bold;
+  text-transform: capitalize;
   margin: -0.5rem 0rem 0rem 2rem;
 `;
 export const FlexContainer = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100vw;
   justify-content: space-between;
   border-radius: 20px;
+  margin: 0.2rem;
+  @media (max-width: 790px) {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
 `;
 export const Container1 = styled.div`
-  background-color: #beb9b9;
-  width: 20%;
-  opacity: 0.3;
+  background-color: rgba(139, 133, 133, 0.3);
+  width: 20vw;
   border-radius: 20px;
   border: 2px solid black;
   align-items: center;
+  @media (max-width: 790px) {
+    width: 90vw;
+  }
 `;
 export const Avator = styled.img`
   background-color: #424141;
@@ -45,6 +63,7 @@ export const SubContainer = styled.div`
   align-items: center;
   text-align: center;
   font-size: 15px;
+  color: black;
 `;
 export const H11 = styled.h1`
   grid-column-start: 1;
@@ -58,12 +77,15 @@ export const H1 = styled.div`
   padding-right: 2rem;
 `;
 export const Container2 = styled.h3`
-  background-color: #beb9b9;
-  width: 78%;
-  opacity: 0.3;
+  background-color: rgba(139, 133, 133, 0.3);
+  width: 78vw;
   border-radius: 20px;
   border: 2px solid black;
   align-items: center;
+  margin-top: 10px;
+  @media (max-width: 790px) {
+    width: 90vw;
+  }
 `;
 export const Div = styled.div`
   margin-left: 2rem;
@@ -78,3 +100,13 @@ export const Text = styled.h4`
 `;
 export const P = styled.p``;
 export const Daze = styled.h4``;
+export const Alink = styled(Link)`
+  align-self: center;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 10px;
+  color: #fff;
+  background-color: blue;
+  font-size: 30px;
+`;

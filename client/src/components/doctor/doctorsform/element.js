@@ -46,12 +46,7 @@ export const Form = styled.form`
 `;
 export const Div1 = styled.div``;
 
-export const Div3 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding: 1rem;
-`;
+export const Div3 = styled.div``;
 export const Div4 = styled.div`
   display: flex;
   justify-content: space-between;

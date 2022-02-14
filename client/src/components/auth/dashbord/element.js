@@ -6,6 +6,8 @@ export const Nav = styled.nav`
   background-color: #9999f8;
   height: 100vh;
   position: relative;
+  padding-top: 5rem;
+  width: 100vw;
 `;
 export const Div = styled.div`
   display: flex;
@@ -50,7 +52,7 @@ export const Maincover = styled.div`
 `;
 export const Cover2 = styled.div`
   background-color: greenyellow;
-  width: 80%;
+  width: 75vw;
   margin-left: 0.5rem;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -60,12 +62,31 @@ export const Cover2 = styled.div`
 export const Cover = styled.div`
   margin-left: 0.8rem;
   background-color: blue;
-  width: 15%;
+  width: 20vw;
   height: 65vh;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
+  list-style: none;
+  @media (max-width: 790px) {
+    width: 30vw;
+  }
+
   li {
     padding: 0.3rem;
     margin-left: 1rem;
+    font-size: 15px;
+    list-style: none;
+    font-weight: bold;
+  }
+  a {
+    text-decoration: none;
+    color: gray;
+    font-size: 20px;
+    padding: 1rem;
+  }
+
+  p {
+    font-weight: bold;
+    padding: 1rem;
   }
 `;

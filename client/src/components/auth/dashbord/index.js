@@ -52,47 +52,39 @@ const Admin = () => {
         </Div>
         <Sub>
           <Link to="email">email</Link>
-          <Link to="logout">logout</Link>
         </Sub>
         <Maincover>
           <Cover>
             <p>MAIN NAVIGATION </p>
             <li>
-              <FaHome />
+              <FaHome style={{ fontSize: "25px" }} />
               Dashboard
             </li>
             <li>
-              <MdDateRange />
+              <MdDateRange style={{ fontSize: "25px" }} />
               Appointments
-              <MdAddCircleOutline />
             </li>
             <li>
-              <MdPersonAdd />
+              <a href="/DoctorAdmin">Appointments</a>
+            </li>
+            <li>
+              <MdPersonAdd style={{ fontSize: "25px" }} />
               Doctors
-              <MdAddCircleOutline />
               <div class="sub_appointment">
                 <ul>
                   <li>
-                    <Link to="/DoctorAdmin">All Doctors</Link>
-                  </li>
-                  <li>
-                    <Link to="/DoctorApprove">Doctor's approve</Link>
+                    <a href="/DoctorAdmin">All Doctors</a>
                   </li>
                 </ul>
               </div>
             </li>
             <li>
-              <FaUserAlt />
+              <FaUserAlt style={{ fontSize: "25px" }} />
               Patient
-              <MdAddCircleOutline />
               <div class="sub_appointment">
                 <ul>
                   <li>
                     <a href="/patients">All Patients</a>
-                  </li>
-
-                  <li>
-                    <a href="Book appointme">Patient Profile</a>
                   </li>
                 </ul>
               </div>
@@ -100,7 +92,6 @@ const Admin = () => {
           </Cover>
           <Cover2>
             <DoctorAdmin />
-            <DoctorApprove />
           </Cover2>
         </Maincover>
       </Nav>

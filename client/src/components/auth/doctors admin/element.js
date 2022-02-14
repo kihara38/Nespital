@@ -6,8 +6,8 @@ export const Card = styled.div`
   align-items: center;
   margin: 5px;
   align-self: center;
-  width: 13rem;
-  height: 18rem;
+  width: 20rem;
+  height: 22rem;
   background-color: #853c3c;
   border-radius: 5px;
   div {

@@ -4,7 +4,7 @@ const passport = require("passport");
 const user = require("../../model/user");
 const multer = require("multer");
 const path = require("path");
-
+const patient = require("../../model/patient");
 const doctor = require("../../model/doctor");
 const Appointment = require("../../model/appointment");
 
@@ -40,44 +40,9 @@ router.get(
         message: error,
       });
     }
-
-    // doctor.find()
-    // .then(doctors=>res.json(doctors))
-    // .catch(err=>res.status(400).json(err))
   }
 );
 
-//@ route get api/doctor/id
-//@desc test user route
-//@access public
-router.get(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
-    const errors = {};
-
-    try {
-      let doctors = await doctor
-        .findOne({ user: req.params.id })
-        .populate("user", ["name", "role"])
-        .exec();
-      console.log(doctors);
-      return res.status(200).json({
-        success: true,
-        data: doctors,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        message: errors,
-      });
-    }
-
-    // doctor.find()
-    // .then(doctors=>res.json(doctors))
-    // .catch(err=>res.status(400).json(err))
-  }
-);
 //@ route post api/doctor
 //@desc post doctor route
 //@access public
@@ -127,6 +92,38 @@ router.post("/", upload.single("doctorimage"), (req, res) => {
 //@ route get api/doctor/consultation
 //@desc test consultation route
 //@access public
+router.get(
+  "/consultation",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const errors = {};
+    console.log("working");
+    try {
+      let doctors = await doctor.find({}).populate("consultation").exec();
+      // console.log("doctors", doctors);
+      let pat = await patient.findOne({ user: req.user });
+      let consultations = [];
+      doctors.forEach((doctor) => {
+        doctor.consultation.forEach((consultation) => {
+          // console.log(consultation.patient, pat);
+          if (consultation.patient == pat.id) {
+            consultations.push(consultation);
+          }
+        });
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: consultations,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  }
+);
 
 //@ route post api/doctor/consultation
 //@desc test consultation route
@@ -224,6 +221,33 @@ router.delete(
     const errors = {};
     try {
       let dooctors = await doctor.findOneAndRemove({ userId: user });
+      return res.status(200).json({
+        success: true,
+        data: doctors,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
+  }
+);
+//@ route get api/doctor/id
+//@desc test user route
+//@access public
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const errors = {};
+
+    try {
+      let doctors = await doctor
+        .findOne({ user: req.params.id })
+        .populate("user", ["name", "role"])
+        .exec();
+      console.log(doctors);
       return res.status(200).json({
         success: true,
         data: doctors,

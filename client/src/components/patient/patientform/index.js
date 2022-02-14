@@ -14,7 +14,6 @@ import {
   Div7,
   Div8,
   Div9,
-  Diva,
   Fieldset,
   Legend,
   Select,
@@ -95,7 +94,8 @@ const PatientForm = () => {
             value={DoB}
             onChange={(e) => setDOB(e.target.value)}
           />
-
+        </Div1>
+        <Div1>
           <Input
             type="radio"
             value="M"
@@ -116,56 +116,58 @@ const PatientForm = () => {
 
         <Fieldset>
           <Legend>personaldetails</Legend>
-          <Div3>
-            <Div4>
-              <Input
-                type="number"
-                name="contact"
-                value={contact}
-                onChange={(e) => setcontact(e.target.value)}
-              />
 
-              <Select
-                name="county"
-                id="county"
-                value={county}
-                onChange={(e) => setCounty(e.target.value)}
-              >
-                <option defaultChecked>choose your county</option>
-                <option>Mombasa</option>
-                <option>Kwale</option>
-                <option>Nairobi</option>
-                <option>Kiambu</option>
-                <option>Muranga</option>
-                <option>Mombasa</option>
-                <option>Machakos</option>
-                <option>Mombasa</option>
-                <option>Kilifi</option>
-                <option>Narok</option>
-                <option>Bomet</option>
-                <option>Mombasa</option>
-                <option>kitui</option>
-                <option>Tana river</option>
-                <option>Lamu</option>
-                <option>Taita taveta</option>
-                <option>Garissa</option>
-                <option>Wajir</option>
-                <option>Mandera</option>
-                <option>Marsabit</option>
-                <option>Isiolo</option>
-                <option>Meru</option>
-                <option>Tharaka nithi</option>
-                <option>Embu</option>
-                <option>Makueni</option>
-                <option>Nyandarua</option>
-                <option>Nyeri</option>
-                <option>Kirinyanga</option>
-                <option>West pokot</option>
-                <option>Samburu</option>
-                <option>Trans nzoia</option>
-                <option>Uasin gishu</option>
-              </Select>
-            </Div4>
+          <Div3>
+            <Input
+              type="number"
+              name="contact"
+              value={contact}
+              onChange={(e) => setcontact(e.target.value)}
+              placeholder="contact"
+            />
+
+            <Select
+              name="county"
+              id="county"
+              value={county}
+              onChange={(e) => setCounty(e.target.value)}
+            >
+              <option defaultChecked>choose your county</option>
+              <option>Mombasa</option>
+              <option>Kwale</option>
+              <option>Nairobi</option>
+              <option>Kiambu</option>
+              <option>Muranga</option>
+              <option>Mombasa</option>
+              <option>Machakos</option>
+              <option>Mombasa</option>
+              <option>Kilifi</option>
+              <option>Narok</option>
+              <option>Bomet</option>
+              <option>Mombasa</option>
+              <option>kitui</option>
+              <option>Tana river</option>
+              <option>Lamu</option>
+              <option>Taita taveta</option>
+              <option>Garissa</option>
+              <option>Wajir</option>
+              <option>Mandera</option>
+              <option>Marsabit</option>
+              <option>Isiolo</option>
+              <option>Meru</option>
+              <option>Tharaka nithi</option>
+              <option>Embu</option>
+              <option>Makueni</option>
+              <option>Nyandarua</option>
+              <option>Nyeri</option>
+              <option>Kirinyanga</option>
+              <option>West pokot</option>
+              <option>Samburu</option>
+              <option>Trans nzoia</option>
+              <option>Uasin gishu</option>
+            </Select>
+          </Div3>
+          <Div4>
             <Input
               type="text"
               name="District"
@@ -180,7 +182,7 @@ const PatientForm = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
             />
-          </Div3>
+          </Div4>
           <Div5>
             <Input
               type="number"
@@ -200,39 +202,40 @@ const PatientForm = () => {
         </Fieldset>
         <Fieldset>
           <Legend>emergencyperson</Legend>
-          <Diva>
-            <Div7>
-              <Input
-                type="name"
-                name="name"
-                placeholder="name"
-                value={name}
-                onChange={(e) => setname(e.target.value)}
-              />
-            </Div7>
-            <Div8>
-              <Select
-                name="relationship"
-                id="county"
-                value={relationship}
-                onChange={(e) => setrelationship(e.target.value)}
-              >
-                <option defaultChecked>Relationship</option>
-                <option>parent</option>
-                <option>spouce</option>
-                <option>child</option>
-                <option>relative</option>
-                <option>gurdian</option>
-                <option>Friend</option>
-              </Select>
-              <Input
-                type="number"
-                name="contact1"
-                value={contact1}
-                onChange={(e) => setcontact1(e.target.value)}
-              />
-            </Div8>
-            <Div9></Div9>
+
+          <Div7>
+            <Input
+              type="name"
+              name="name"
+              placeholder="name"
+              value={name}
+              onChange={(e) => setname(e.target.value)}
+            />
+          </Div7>
+          <Div8>
+            <Select
+              name="relationship"
+              id="county"
+              value={relationship}
+              onChange={(e) => setrelationship(e.target.value)}
+            >
+              <option defaultChecked>Relationship</option>
+              <option>parent</option>
+              <option>spouce</option>
+              <option>child</option>
+              <option>relative</option>
+              <option>gurdian</option>
+              <option>Friend</option>
+            </Select>
+            <Input
+              type="number"
+              name="contact1"
+              value={contact1}
+              placeholder="contact1"
+              onChange={(e) => setcontact1(e.target.value)}
+            />
+          </Div8>
+          <Div9>
             <Select
               name="county2"
               id="county"
@@ -273,6 +276,7 @@ const PatientForm = () => {
               <option>Trans nzoia</option>
               <option>Uasin gishu</option>
             </Select>
+
             <Input
               type="text"
               name="Location2"
@@ -280,7 +284,7 @@ const PatientForm = () => {
               value={Location2}
               onChange={(e) => setLocation2(e.target.value)}
             />
-          </Diva>
+          </Div9>
         </Fieldset>
         <button type="submit">Submit</button>
       </Form>

@@ -5,9 +5,12 @@ export const Div = styled.form`
   flex-direction: column;
   background-color: #2e2eff;
   height: 100vh;
+  width: 100vw;
 `;
 export const H1 = styled.h1`
+  padding-top: 5rem;
   text-align: center;
+  width: 95vw;
 `;
 export const Div1 = styled.div`
   display: flex;
@@ -15,6 +18,7 @@ export const Div1 = styled.div`
   justify-content: start;
   align-items: left;
   padding: 2rem;
+  width: 80vw;
   h3 {
     font-size: 30px;
   }
@@ -31,6 +35,7 @@ export const Div2 = styled.div`
   align-items: center;
   text-align: center;
   margin-top: 3rem;
+  width: 100vw;
 `;
 export const Div3 = styled.div`
   margin-top: 2rem;

@@ -10,6 +10,28 @@ const patient = require("../../model/patient");
 //@access public
 router.get("/test", (req, res) => res.json({ msg: "booking works" }));
 
+//@ route get api/appointment
+//@desc test appointment
+//@access public
+router.get(
+  "/all",
+
+  async (req, res) => {
+    try {
+      let appointments = await Appointment.find({}).populate().exec();
+      return res.status(200).json({
+        success: true,
+        data: appointments,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error,
+      });
+    }
+  }
+);
+
 //@ route post api/appointment
 //@desc test appointment
 //@access public
