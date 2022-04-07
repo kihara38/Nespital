@@ -27,8 +27,8 @@ export const Card = styled.div`
   button {
     background-color: whitesmoke;
     border: none;
-    width: 100px;
-    height: 30px;
+    width: 30vw;
+    height: 50rem;
     border-radius: 3px;
     box-shadow: 2px 5px 2px 2px rgba(0, 0, 0, 0.2);
   }

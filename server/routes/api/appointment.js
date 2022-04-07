@@ -36,12 +36,13 @@ router.get(
 //@desc test appointment
 //@access public
 router.post("/", async (req, res) => {
-  const { userId: user, approval_status, date, doctor } = req.body;
+  const { userId, approval_status, date, doctor } = req.body;
   const appointmentDate = date.split("T")[0];
   const time = date.split("T")[1];
   try {
     // get the patient hpn using userId
-    let pat = await patient.findOne({ user });
+    let pat = await patient.findOne({ user: userId });
+    console.log(pat);
 
     const appointment = {
       patientHPN: pat.HPN,
@@ -57,6 +58,7 @@ router.post("/", async (req, res) => {
       data: newBooking,
     });
   } catch (error) {
+    console.log(error);
     return res.status(400).json({
       success: false,
       message: error,

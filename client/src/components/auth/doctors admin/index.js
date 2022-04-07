@@ -21,6 +21,13 @@ const DoctorAdmin = () => {
         setIsLoading(false);
         console.log("doctor appointments", response.data);
       });
+    axios
+      .delete("http://localhost:5002/api/doctor/id", config)
+      .then((response) => {
+        setProfile(response.data.data);
+        setIsLoading(false);
+        console.log("delete", response.data);
+      });
   }, []);
 
   if (!Loading) {

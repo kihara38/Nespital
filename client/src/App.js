@@ -17,8 +17,11 @@ import Registerdoctor from "./components/auth/registerDoctor";
 import Admin from "./components/auth/dashbord";
 import App_index from "./components/roles";
 import DoctorAdmin from "./components/auth/doctors admin";
-import DoctorApprove from "./components/auth/doctorsApprove";
+
 import Patients from "./components/auth/Patients";
+
+import Allappointments from "./components/auth/Allappointments";
+import PatientBooking from "./components/patient/patientbooking";
 
 function App() {
   return (
@@ -78,8 +81,11 @@ function App() {
         <Route path="/DoctorAdmin" exact>
           <DoctorAdmin />
         </Route>
-        <Route path="/DoctorApprove" exact>
-          <DoctorApprove />
+        <Route path="/AllAppointments" exact>
+          <Allappointments />
+        </Route>
+        <Route path="/PatientBooking" exact>
+          <PatientBooking />
         </Route>
         <Route path="/Patients" exact>
           <Patients />

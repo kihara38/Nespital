@@ -65,7 +65,7 @@ const Admin = () => {
               Appointments
             </li>
             <li>
-              <a href="/DoctorAdmin">Appointments</a>
+              <a href="/AllAppointments">Appointments</a>
             </li>
             <li>
               <MdPersonAdd style={{ fontSize: "25px" }} />

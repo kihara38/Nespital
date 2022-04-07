@@ -4,7 +4,7 @@ const passport = require("passport");
 const shortid = require("shortid");
 const multer = require("multer");
 const path = require("path");
-
+const Appointment = require("../../model/appointment");
 const patient = require("../../model/patient");
 const user = require("../../model/user");
 
@@ -70,6 +70,34 @@ router.get(
     }
   }
 );
+router.get(
+  "/appointments/:userId",
+  // passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const errors = {};
+    try {
+      const current_patient = await patient
+        .findOne({ userId: req.params.userId })
+        .populate()
+        .exec();
+      console.log(current_patient);
+      const appointments = await Appointment.find({
+        patientHPN: current_patient.HPN,
+      });
+      console.log(appointments);
+
+      return res.status(200).json({
+        success: true,
+        data: appointments,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: errors,
+      });
+    }
+  }
+);
 
 //@ route post api/patient
 //@desc post patient route
@@ -113,6 +141,7 @@ router.post("/", upload.single("patient-image"), async (req, res) => {
     });
   }
 });
+
 // @route   DELETE api/patient
 // @desc    Delete user and patient
 // @access  Private

@@ -10,24 +10,19 @@ export const Div = styled.form`
 export const H1 = styled.h1`
   padding-top: 5rem;
   text-align: center;
-  width: 95vw;
+  font-size: 50px;
 `;
 export const Div1 = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: left;
-  padding: 2rem;
-  width: 80vw;
-  h3 {
-    font-size: 30px;
-  }
-  h4 {
-    align-self: center;
-    font-size: 25px;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  h1 {
+    font-size: 80px;
   }
   h5 {
-    font-size: 30px;
+    font-size: 50px;
   }
 `;
 export const Div2 = styled.div`

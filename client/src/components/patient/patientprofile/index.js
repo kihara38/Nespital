@@ -135,14 +135,26 @@ const PatientProfile = () => {
               <H4>Doctors Specialization</H4>
               <Text>Dentist</Text>
             </Div>
-            <Div>
-              <H4>Disease</H4>
-              <Text>{Consult[0].disease}</Text>
-            </Div>
-            <Div>
-              <H5>consotation</H5>
-              <P>{Consult[0].description}</P>
-            </Div>
+
+            <div>
+              {Loading ? (
+                <div>profile loading..</div>
+              ) : (
+                Consult.map((Consult, index) => (
+                  <div>
+                    <Div>
+                      <H4>Disease</H4>
+                      <Text>{Consult.disease}</Text>
+                    </Div>
+                    <Div>
+                      <H5>consotation</H5>
+                      <P>{Consult.description}</P>
+                    </Div>
+                  </div>
+                ))
+              )}
+            </div>
+
             <H6>
               <Daze />
             </H6>

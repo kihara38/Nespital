@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 
 export const MainContainer = styled.div`
   background-image: url(${img});
-  background-color: rgba();
+
   background-size: cover;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 100vh;
 `;
 export const Div1 = styled.div`
   padding-top: 4rem;

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import getCurrentUser from "../../lib/auth";
-import { Doctor1, Detail, List, Card } from "./element";
-const Patients = () => {
+import { Doctor1, Card } from "./element";
+const Allappointments = () => {
   const [profile, setProfile] = useState([]);
   const [Loading, setIsLoading] = useState(true);
 
@@ -15,7 +15,7 @@ const Patients = () => {
     };
 
     axios
-      .get("http://localhost:5002/api/patient/all", config)
+      .get("http://localhost:5002/api/appointment/all", config)
       .then((response) => {
         setProfile(response.data.data);
         setIsLoading(false);
@@ -26,18 +26,33 @@ const Patients = () => {
   if (!Loading) {
     return (
       <Doctor1 id="Doctors approve">
-        <code>All Patients</code>
+        <code>All Appointments</code>
         <div>
           {Loading ? (
             <div>profile loading..</div>
           ) : (
             profile.map((profile, index) => (
               <Card>
-                <h6>Name:{profile.user.name}</h6>
-                <h6>patient No:{profile.HPN}</h6>
-                <h6>phone number:{profile.personaladdress[0].contact}</h6>
-                <h6>emergency number:{profile.emergencyperson[0].contact1}</h6>
-                <button>Delete</button>
+                <div>
+                  patientHPN:
+                  <h3>{profile.patientHPN}</h3>
+                </div>
+                <div>
+                  Doctor ID:
+                  <h3>{profile.doctor}</h3>
+                </div>
+                <div>
+                  Date:
+                  <h3>{profile.date}</h3>
+                </div>
+                <div>
+                  Time:
+                  <h3>{profile.time}</h3>
+                </div>
+                <div>
+                  Status:
+                  <h3>{profile.approval_status}</h3>
+                </div>
               </Card>
             ))
           )}
@@ -49,4 +64,4 @@ const Patients = () => {
   }
 };
 
-export default Patients;
+export default Allappointments;

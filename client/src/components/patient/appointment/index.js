@@ -68,21 +68,14 @@ const Booking = () => {
     <Div onSubmit={submit}>
       <H1>Booking Appointment</H1>
       <Div1>
-        <h3>Hospital</h3>
-        <h4>Doctor</h4>
-        <h5>specialist</h5>
+        <h1>Hospital</h1>
+
+        <h5>St Mary's</h5>
       </Div1>
       {Loading ? (
         <div></div>
       ) : (
-        <div
-          style={{
-            width: "100%",
-            textAlign: "center",
-            display: "flex",
-            justifyItems: "center",
-          }}
-        >
+        <div>
           <Div1>
             <Box sx={{ width: 300, textAlign: "center " }}>
               <FormControl fullWidth>
@@ -122,17 +115,6 @@ const Booking = () => {
       <Div3>
         <input type="submit" placeholder="Submit" />
       </Div3>
-      <Div4>
-        <Button value={Pending} onChange={(e) => setPending(e.target.value)}>
-          Pending
-        </Button>
-        <Button1 value={Approved} onChange={(e) => setApproved(e.target.value)}>
-          Approved
-        </Button1>
-        <Button2 value={Canceled} onChange={(e) => setCanceled(e.target.value)}>
-          Canceled
-        </Button2>
-      </Div4>
     </Div>
   );
 };
